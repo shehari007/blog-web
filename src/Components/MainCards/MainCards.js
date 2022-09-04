@@ -10,6 +10,14 @@ const MainCards = () => {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   };
+  const textStyleHead = {
+    maxWidth: '100%',
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: 1,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  };
   const [dataInfo, setDataInfo] = useState([]);
     useEffect(() => {
         const dataInfo  = async () => {
@@ -23,17 +31,19 @@ const MainCards = () => {
   return (
     <><div className="row mb-2">
       {dataInfo.map((data) => {
+        const link = "/blogtitle/" + data.title
         return <>
         <React.Fragment key={data.id}>
+        
         <div className="col-md-6" >
         <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div className="col p-4 d-flex flex-column position-static">
           
             <strong className="d-inline-block mb-2 text-primary">{data.category}</strong>
-            <h3 className="mb-0">{data.title}</h3>
+            <h3 className="mb-0"style={textStyleHead}>{data.title}</h3>
             <div className="mb-1 text-muted">Nov 12</div>
             <p className="card-text mb-auto" style={textStyle}>{data.post}</p>
-            <a href="localhost:3000" className="stretched-link">Continue reading</a>
+            <a href={link} >Continue reading</a>
             
           </div>
           
