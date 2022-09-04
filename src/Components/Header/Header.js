@@ -123,8 +123,10 @@ const Header = () => {
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-between">
             {menuData.map((data, index) => {
+              const link = ('/category/' + data.category + '');
               return (
-                <a className="p-2 link-dark" href="localhost:3000" key={index} style={{textDecoration: 'none', fontWeight: 'bold'}}>{data.category}</a>
+                
+                <a className="p-2 link-dark" href={link} key={index} style={{textDecoration: 'none', fontWeight: 'bold'}}>{data.category}</a>
               )
             })}
           </nav>
