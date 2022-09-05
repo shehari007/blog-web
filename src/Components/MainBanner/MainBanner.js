@@ -10,13 +10,13 @@ const MainBanner = () => {
         WebkitLineClamp: 4,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-      };
+    };
     const [dataInfo, setDataInfo] = useState([]);
     useEffect(() => {
-        const dataInfo  = async () => {
-          const res = await axios('http://localhost/featuredpost.php?action=featured');
-          //console.log(res.data);
-          setDataInfo(res.data);
+        const dataInfo = async () => {
+            const res = await axios('http://localhost/featuredpost.php?action=featured');
+            //console.log(res.data);
+            setDataInfo(res.data);
         };
         dataInfo();
     }, []);
@@ -27,11 +27,11 @@ const MainBanner = () => {
                 {dataInfo.map((data) => {
                     const link = "/blogtitle/" + data.title
                     return (
-                    <React.Fragment key={data.id}>
-                    <h1 className="display-4 fst-italic">{data.title}</h1>
-                    <p className="lead my-3"style={textStyle}>{data.post}</p>
-                    <p className="lead mb-0"><a href={link} className="text-white fw-bold">Continue reading...</a></p>
-                    </React.Fragment>
+                        <React.Fragment key={data.id}>
+                            <h1 className="display-4 fst-italic">{data.title}</h1>
+                            <p className="lead my-3" style={textStyle}>{data.post}</p>
+                            <p className="lead mb-0"><a href={link} className="text-white fw-bold">Continue reading...</a></p>
+                        </React.Fragment>
                     )
                 })}
 

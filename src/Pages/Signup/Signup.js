@@ -65,7 +65,7 @@ const Signup = () => {
           <input type="password" className="form-control" id="floatingPassword" name="password" onChange={onChangeInput} placeholder="Password" />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button className="w-100 btn btn-lg btn-primary" type="button" onClick={SubmitForm}>Sign in</button>
+        <button className="w-100 btn btn-lg btn-primary" type="button" onClick={SubmitForm}>Sign Up</button>
         <a href='/login'>Already have an account? Login here..</a>
         <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
       </form>

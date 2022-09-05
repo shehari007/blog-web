@@ -19,7 +19,7 @@ const Title = () => {
     }, []);
 
     return (
-        <div className="container" style={{marginTop: '2%'}}>
+        <div className="container" style={{ marginTop: '2%' }}>
             <div className="row g-5">
                 <div className="col-md-8">
                     {info.map((data) => {
