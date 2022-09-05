@@ -11,16 +11,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <>
-    <Router>
-    <Header />
-      <Routes>
-        <Route exact path="/" element={<HomePage/>} />
-        <Route path="/home" element={<HomePage/>} />
-        <Route path="/category/:category" element={<Category/>} />
-        <Route path="/blogtitle/:title" element={<BlogTitle/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/signup" element={<SignupPage/>} />
-      </Routes>  
+      <Router>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/category/:category" element={<Category />} />
+          <Route path="/blogtitle/:title" element={<BlogTitle />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+        </Routes>
       </Router>
       <Footer />
     </>

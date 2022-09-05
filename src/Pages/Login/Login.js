@@ -3,7 +3,7 @@ import './Login.css';
 import LOGO from '..//..//Assets/login.png'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import  secureLocalStorage  from  "react-secure-storage";
 import CryptoJS from 'crypto-js';
 
 const Login = () => {
@@ -48,18 +48,18 @@ const Login = () => {
           (response.data.map((data) => {return tokenStatus = data.role}));
           (response.data.map((data) => {return UserDetails = data.name}));
             var encryptedUSerDetails = CryptoJS.AES.encrypt(UserDetails, 'Secret Pharase').toString();
-            localStorage.setItem('UserDetail', encryptedUSerDetails);
+            secureLocalStorage.setItem('UserDetail', encryptedUSerDetails);
           if (tokenStatus === 'Admin') {
             var encryptedTokenAdmin = CryptoJS.AES.encrypt(tokenStatus, 'Secret Pharase').toString();
-            localStorage.setItem('setAuthentication', encryptedTokenAdmin);
+            secureLocalStorage.setItem('setAuthentication', encryptedTokenAdmin);
             var encryptedRoleAdmin = CryptoJS.AES.encrypt('Admin', 'Secret Pharase').toString();
-            localStorage.setItem('setRole', encryptedRoleAdmin);
+            secureLocalStorage.setItem('setRole', encryptedRoleAdmin);
             history('/home')
           }else if (tokenStatus === 'User') {
             var encryptedTokenUser = CryptoJS.AES.encrypt(tokenStatus, 'Secret Pharase').toString();
-            localStorage.setItem('setAuthentication', encryptedTokenUser);
+            secureLocalStorage.setItem('setAuthentication', encryptedTokenUser);
             var encryptedRoleUser = CryptoJS.AES.encrypt('Admin', 'Secret Pharase').toString();
-            localStorage.setItem('setRole', encryptedRoleUser);
+            secureLocalStorage.setItem('setRole', encryptedRoleUser);
             history('/home')
           }
         }

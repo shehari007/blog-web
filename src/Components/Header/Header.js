@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import CryptoJS from 'crypto-js'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import  secureLocalStorage  from  "react-secure-storage";
 
 
 const Header = () => {
 
-  const tokenStatus = localStorage.getItem('setAuthentication')
-  const Username = localStorage.getItem('UserDetail')
+  const tokenStatus = secureLocalStorage.getItem('setAuthentication')
+  const Username = secureLocalStorage.getItem('UserDetail')
   if (tokenStatus) {
     var decryptedToken = CryptoJS.AES.decrypt(tokenStatus, 'Secret Pharase');
     var role = decryptedToken.toString(CryptoJS.enc.Utf8);
@@ -20,7 +21,7 @@ const Header = () => {
 
   const handleLogout = () => {
 
-    localStorage.clear();
+    secureLocalStorage.clear();
     history('/login');
   }
   const [menuData, setMenuData] = useState([]);
