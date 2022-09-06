@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Banner from '..//..//Components/MainBanner/MainBanner'
+import  secureLocalStorage  from  "react-secure-storage";
+import CryptoJS from 'crypto-js'
+const MyBlogPosts = () => {
 
-const Category = () => {
-
-  const params = useParams()
-  const CategoryName = params.category
+    const Username = secureLocalStorage.getItem('UserDetail')
+    if (Username) {
+      
+      var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
+      var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
+    }
 
   
   const [info, setInfo] = useState([]);
@@ -15,7 +20,7 @@ const Category = () => {
   useEffect(() => {
 
     const getUsers = async () => {
-      const res = await axios(`http://localhost/allcat.php?kategori=${CategoryName}`);
+      const res = await axios(`http://localhost/myposts.php?username=${username}`);
       console.log(res.data);
       setInfo(res.data);
     };
@@ -32,16 +37,14 @@ const Category = () => {
     textOverflow: 'ellipsis',
   };
   return (
-    <div className="container">
-      <Banner />
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <div className="row g-5">
         <div className="col-md-8">
 
-          <h3 className="pb-4 mb-4 fst-italic border-bottom">
-            From the {CategoryName}
-          </h3>
-
-          {info.map((data) => {
+          
+        {info==='0 results[]'?<h1>no results found</h1>: 
+          <>{info.map((data) => {
             const link = "/blogtitle/" + data.title
             return <>
               <article className="blog-post">
@@ -50,8 +53,8 @@ const Category = () => {
                 <p style={textStyle}>{data.post}</p>
                 <a href={link} >Continue reading</a> </article>
             </>
-          })}
-
+          })}</>
+}
           <nav className="blog-pagination" aria-label="Pagination">
             <a className="btn btn-outline-primary rounded-pill" href="localhost:3000">Older</a>
             <a className="btn btn-outline-secondary rounded-pill disabled" href="http://localhost:3000">Newer</a>
@@ -93,9 +96,9 @@ const Category = () => {
             </div>
           </div>
         </div>
-      </div></div>
+      </div></div></main>
   )
 }
 
 
-export default Category
+export default MyBlogPosts
