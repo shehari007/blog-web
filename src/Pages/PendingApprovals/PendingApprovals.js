@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Banner from '..//..//Components/MainBanner/MainBanner'
 
-const Category = () => {
+const UserPosts = () => {
 
   const params = useParams()
-  const CategoryName = params.category
+  const UserName = params.username
 
   
   const [info, setInfo] = useState([]);
@@ -15,7 +15,7 @@ const Category = () => {
   useEffect(() => {
 
     const getUsers = async () => {
-      const res = await axios(`http://localhost/allcat.php?kategori=${CategoryName}`);
+      const res = await axios(`http://localhost/myposts.php?username=${UserName}`);
       console.log(res.data);
       setInfo(res.data);
     };
@@ -38,7 +38,7 @@ const Category = () => {
         <div className="col-md-8">
 
           <h3 className="pb-4 mb-4 fst-italic border-bottom">
-            From the {CategoryName}
+            From the {UserName}
           </h3>
 
           {info.map((data) => {
@@ -98,4 +98,4 @@ const Category = () => {
 }
 
 
-export default Category
+export default UserPosts

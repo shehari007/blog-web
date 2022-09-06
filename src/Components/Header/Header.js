@@ -50,7 +50,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="/dashboard" className="nav-link text-white">
+                    <a href="/dashboard/My Dashboard" className="nav-link text-white">
                       Dashboard
                     </a>
                   </li>
@@ -65,7 +65,7 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="localhost:3000" className="nav-link text-white">
+                    <a href="/dashboard/profile" className="nav-link text-white">
                       Profile
                     </a>
                   </li>
@@ -83,7 +83,7 @@ const Header = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="localhost:3000" className="nav-link text-white">
+                      <a href="/dashboard/My Dashboard" className="nav-link text-white">
                         Dashboard
                       </a>
                     </li>
@@ -98,7 +98,7 @@ const Header = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="localhost:3000" className="nav-link text-white">
+                      <a href="/dashboard/profile" className="nav-link text-white">
                         Profile
                       </a>
                     </li>
