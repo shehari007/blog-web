@@ -109,6 +109,7 @@ const AllPosts = () => {
                       <th scope="col" style={{ width: '20%' }}>Title</th>
                       <th scope="col" style={{ width: '30%' }}>Blog</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Categpry</th>
                       <th scope="col" style={{ width: '5%' }}>Access</th>
                       <th scope="col">Actions</th>
                     </tr>
@@ -123,6 +124,7 @@ const AllPosts = () => {
                           <td>{data.title}</td>
                           <td style={textStyle}>{data.post}</td>
                           <td>{data.status}</td>
+                          <td>{data.category}</td>
                           <td style={{ maxWidth: '20%' }}>{data.user}</td>
                           <td>{UserRole === 'Admin' && data.status === 'Pending Approval' ? <><button className="btn btn-primary">Edit</button>
                             <button className="btn btn-danger" onClick={() => onDeleteAdmin(data.id)}>Permanently Delete</button>

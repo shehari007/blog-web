@@ -112,6 +112,7 @@ const MyBlogPosts = () => {
                         <th scope="col" style={{ width: '20%' }}>Title</th>
                         <th scope="col" style={{ width: '30%' }}>Blog</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
@@ -124,6 +125,7 @@ const MyBlogPosts = () => {
                             <td >{data.title}</td>
                             <td style={textStyle}>{data.post}</td>
                             <td>{data.status}</td>
+                            <td>{data.category}</td>
                             <td>{UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
                               <button className="btn btn-danger"onClick={() => onDelete(data.id)}>Delete</button>
                               </> : 
