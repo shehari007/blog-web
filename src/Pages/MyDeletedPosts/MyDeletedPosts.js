@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import Banner from '..//..//Components/MainBanner/MainBanner'
 import secureLocalStorage from "react-secure-storage";
-import CryptoJS from 'crypto-js'
-const MyBlogPosts = () => {
+import CryptoJS from 'crypto-js';
 
+
+const MyDeletedPosts = () => {
+  
   const role = secureLocalStorage.getItem('setRole')
   const Username = secureLocalStorage.getItem('UserDetail')
 
@@ -15,32 +15,32 @@ const MyBlogPosts = () => {
     var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
     var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
   }
-
-
+  var Link = ''
   const [infoStatus, setInfoStatus] = useState([]);
   console.log(infoStatus);
 
+  
   useEffect(() => {
-
-    const getUsers = async () => {
-      const res = await axios(`http://localhost/myposts.php?username=${username}`);
+    
+    const getDetails = async () => {
+      const res = await axios(`http://localhost/pendingapprovalsPosts.php?status=${'Deleted'}&name=${username}`);
       console.log(res.data);
       setInfoStatus(res.data);
     };
 
-    getUsers();
+    getDetails();
   }, []);
 
-  const onApprove = (id) => {
+  const onRecoverAdmin = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'approve');
+    data.append('action', 'recoverAdmin');
     data.append('id', id);
     data.append('status', 'Approved');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvefunction.php',
+      url: 'http://localhost/deletedRecover.php',
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -52,6 +52,32 @@ const MyBlogPosts = () => {
       .catch(function (error) {
         console.log(error);
       }).then(() => {
+        alert('Successfully Recoverd')
+        window.location.reload();
+      })
+  }
+  const onRecoverUser = (id) => {
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'recoverUser');
+    data.append('id', id);
+    data.append('status', 'Pending Approval');
+    let config = {
+
+      method: 'post',
+      url: 'http://localhost/deletedRecover.php',
+      headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+      ,
+      data: data
+    };
+
+    axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => {
+        alert('Successfully Recoverd waiting for Approval')
         window.location.reload();
       })
   }
@@ -61,11 +87,10 @@ const MyBlogPosts = () => {
     let data = new FormData();
     data.append('action', 'delete');
     data.append('id', id);
-    data.append('status', 'Deleted');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/myblogRecyclebin.php',
+      url: 'http://localhost/approvalsdelete.php',
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -77,7 +102,7 @@ const MyBlogPosts = () => {
       .catch(function (error) {
         console.log(error);
       }).then(() => {
-        alert('Your post has been deleted successfully')
+        alert('Your post has been Permanently deleted')
         window.location.reload();
       })
   }
@@ -90,16 +115,14 @@ const MyBlogPosts = () => {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   };
-
   return (
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h2>My Blog Posts</h2>
-      <a href='/dashboard/Create A New Post'><button className='btn btn-success'>Create New</button></a>
+      <h2>My Deleted Posts</h2>
       </div>
         <div className="row g-5">
           <div className="col-md-8" style={{ width: '100%' }}>
-            {infoStatus === '0 results[]' ? <><h1>No Posts Found!</h1><a href="/dashboard">Create a new post?</a></>
+            {infoStatus === '0 results[]' ? <><h1>No Posts Found!</h1></>
               :
               <>
                 
@@ -109,7 +132,7 @@ const MyBlogPosts = () => {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col" style={{ width: '20%' }}>Title</th>
+                        <th scope="col" style={{ width: '30%' }}>Title</th>
                         <th scope="col" style={{ width: '30%' }}>Blog</th>
                         <th scope="col">Status</th>
                         <th scope="col">Actions</th>
@@ -124,11 +147,11 @@ const MyBlogPosts = () => {
                             <td >{data.title}</td>
                             <td style={textStyle}>{data.post}</td>
                             <td>{data.status}</td>
-                            <td>{UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
-                              <button className="btn btn-danger"onClick={() => onDelete(data.id)}>Delete</button>
+                            <td>{UserRole === 'Admin' ? <><button className="btn btn-primary"onClick={() => onRecoverAdmin(data.id)}>Recover</button>
+                              <button className="btn btn-danger"onClick={() => onDelete(data.id)}>Permanently Delete</button>
                               </> : 
-                              <><button className="btn btn-primary">Edit</button>
-                                <button className="btn btn-danger" onClick={() => onDelete(data.id)}>Delete</button></>}</td>
+                              <><button className="btn btn-primary" onClick={() => onRecoverUser(data.id)}>Recover</button>
+                                <button className="btn btn-danger" onClick={() => onDelete(data.id)}>Permanently Delete</button></>}</td>
                           </tr>
                         </>
                       })}
@@ -146,4 +169,4 @@ const MyBlogPosts = () => {
 }
 
 
-export default MyBlogPosts
+export default MyDeletedPosts

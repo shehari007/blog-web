@@ -33,20 +33,7 @@ function App() {
               <Route exact path='/dashboard/:Dashboard' element={<Dashboard />} />
             </Route>
 
-            <Route exact path='/dashboard/:createNewPost' element={<ProtectedRoute />}>
-              <Route exact path='/dashboard/:createNewPost' element={<Dashboard />} />
-            </Route>
-
-            <Route exact path='/dashboard/:profile' element={<ProtectedRoute />}>
-              <Route exact path='/dashboard/:profile' element={<Dashboard />} />
-            </Route>
-
-            <Route exact path='/dashboard/:pendingApprovals' element={<ProtectedRoute />}>
-              <Route exact path='/dashboard/:pendingApprovals' element={<Dashboard />} />
-            </Route>
-            <Route exact path='/dashboard/:myblogposts' element={<ProtectedRoute />}>
-              <Route exact path='/dashboard/:myblogposts' element={<Dashboard />} />
-            </Route>
+            
 
           </Routes>
         </Fragment>
