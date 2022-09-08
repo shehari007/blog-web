@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-
+import parse from 'html-react-parser'
 
 const Title = () => {
 
@@ -30,7 +30,7 @@ const Title = () => {
                             <article className="blog-post">
                                 <h2 className="blog-post-title mb-1">{data.title}</h2>
                                 <p className="blog-post-meta">January 1, 2021 by <a href="localhost:3000">{data.name}</a></p>
-                                <p style={{ whiteSpace: 'pre-line' }}>{data.post}</p>
+                                <p style={{ whiteSpace: 'pre-line' }}>{parse(data.post)}</p>
                             </article>
                         </>
                     })}
@@ -46,7 +46,6 @@ const Title = () => {
                             <h4 className="fst-italic">About</h4>
                             <p className="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
                         </div>
-
                         <div className="p-4">
                             <h4 className="fst-italic">Archives</h4>
                             <ol className="list-unstyled mb-0">
@@ -64,7 +63,6 @@ const Title = () => {
                                 <li><a href="localhost:3000">April 2020</a></li>
                             </ol>
                         </div>
-
                         <div className="p-4">
                             <h4 className="fst-italic">Elsewhere</h4>
                             <ol className="list-unstyled">

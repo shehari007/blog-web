@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Banner from '..//..//Components/MainBanner/MainBanner'
+import parse from 'html-react-parser'
 
 const Category = () => {
 
   const params = useParams()
   const CategoryName = params.category
 
-  
+
   const [info, setInfo] = useState([]);
   console.log(info);
 
@@ -22,7 +23,7 @@ const Category = () => {
 
     getUsers();
   }, []);
-  
+
   const textStyle = {
     maxWidth: '100%',
     display: '-webkit-box',
@@ -40,23 +41,24 @@ const Category = () => {
           <h3 className="pb-4 mb-4 fst-italic border-bottom">
             From the {CategoryName}
           </h3>
+          {info === '0 results[]' ? <h1>No Posts Found!</h1> : <>
+            {info.map((data) => {
+              const profilePosts = "/userposts/"+ data.name
+              const link = "/blogtitle/" + data.title
+              return <>
+                <article className="blog-post">
+                  <h2 className="blog-post-title mb-1">{data.title}</h2>
+                  <p className="blog-post-meta">January 1, 2021 by <a href={profilePosts}>{data.name}</a></p>
+                  <p style={textStyle}>{parse(data.post)}</p>
+                  <a href={link} >Continue reading</a> </article>
+              </>
+            })}
 
-          {info.map((data) => {
-            const link = "/blogtitle/" + data.title
-            return <>
-              <article className="blog-post">
-                <h2 className="blog-post-title mb-1">{data.title}</h2>
-                <p className="blog-post-meta">January 1, 2021 by <a href={link}>{data.name}</a></p>
-                <p style={textStyle}>{data.post}</p>
-                <a href={link} >Continue reading</a> </article>
-            </>
-          })}
-
-          <nav className="blog-pagination" aria-label="Pagination">
-            <a className="btn btn-outline-primary rounded-pill" href="localhost:3000">Older</a>
-            <a className="btn btn-outline-secondary rounded-pill disabled" href="http://localhost:3000">Newer</a>
-          </nav>
-
+            <nav className="blog-pagination" aria-label="Pagination">
+              <a className="btn btn-outline-primary rounded-pill" href="localhost:3000">Older</a>
+              <a className="btn btn-outline-secondary rounded-pill disabled" href="http://localhost:3000">Newer</a>
+            </nav></>
+          }
         </div>
         <div className="col-md-4">
           <div className="position-sticky" style={{ top: '2rem' }}>

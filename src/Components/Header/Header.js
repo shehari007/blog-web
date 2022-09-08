@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import CryptoJS from 'crypto-js'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
-import  secureLocalStorage  from  "react-secure-storage";
+import secureLocalStorage from "react-secure-storage";
 
 
 const Header = () => {
@@ -27,7 +27,7 @@ const Header = () => {
   const [menuData, setMenuData] = useState([]);
   useEffect(() => {
     const menuData = async () => {
-      const res = await axios('http://localhost/blog.php?action=menu');
+      const res = await axios('http://localhost/menucategories.php?action=menu');
       setMenuData(res.data);
     };
     menuData();
@@ -55,12 +55,12 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="localhost:3000" className="nav-link text-white">
+                    <a href="/dashboard/Pending Approvals" className="nav-link text-white">
                       Pending Approvals
                     </a>
                   </li>
                   <li>
-                    <a href="localhost:3000" className="nav-link text-white">
+                    <a href="/dashboard/Create A New Post" className="nav-link text-white">
                       Create New Post
                     </a>
                   </li>
@@ -88,12 +88,12 @@ const Header = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="localhost:3000" className="nav-link text-white">
+                      <a href="/dashboard/Pending Approvals" className="nav-link text-white">
                         Pending Approvals
                       </a>
                     </li>
                     <li>
-                      <a href="localhost:3000" className="nav-link text-white">
+                      <a href="/dashboard/Create A New Post" className="nav-link text-white">
                         Create New Post
                       </a>
                     </li>
@@ -110,7 +110,7 @@ const Header = () => {
                 :
                 <><a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome to My BLOG</a>
                   <div className="text-end">
-                    
+
                     <a href="/login" style={{ textDecoration: "none", color: "white" }}><button type="button" className="btn btn-success text-white me-2">Login</button></a>
                     <a href="/signup" style={{ textDecoration: "none", color: "white" }}><button type="button" className="btn btn-primary text-white me-2">Sign-up</button></a>
                   </div></>}
@@ -126,8 +126,8 @@ const Header = () => {
             {menuData.map((data, index) => {
               const link = ('/category/' + data.category + '');
               return (
-                
-                <a className="p-2 link-dark" href={link} key={index} style={{textDecoration: 'none', fontWeight: 'bold'}}>{data.category}</a>
+
+                <a className="p-2 link-dark" href={link} key={index} style={{ textDecoration: 'none', fontWeight: 'bold' }}>{data.category}</a>
               )
             })}
           </nav>

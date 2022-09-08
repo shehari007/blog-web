@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import secureLocalStorage from "react-secure-storage";
-import CryptoJS from 'crypto-js';
-import { useNavigate } from 'react-router';
+import CryptoJS from 'crypto-js'
+const AllPosts = () => {
 
-const PendingApprovals = () => {
-  let history = useNavigate();
   const role = secureLocalStorage.getItem('setRole')
   const Username = secureLocalStorage.getItem('UserDetail')
 
@@ -15,23 +13,20 @@ const PendingApprovals = () => {
     var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
     var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
   }
-  var Link = ''
+
+
   const [infoStatus, setInfoStatus] = useState([]);
   console.log(infoStatus);
 
-  {
-    UserRole === 'Admin' ? Link = `http://localhost/AdminpendingapprovalsPosts.php?status=${'Pending Approval'}` :
-      Link = `http://localhost/pendingapprovalsPosts.php?status=${'Pending Approval'}&name=${username}`
-  }
   useEffect(() => {
-    console.log(Link)
-    const getDetails = async () => {
-      const res = await axios(Link);
+
+    const getUsers = async () => {
+      const res = await axios(`http://localhost/allposts.php`);
       console.log(res.data);
       setInfoStatus(res.data);
     };
 
-    getDetails();
+    getUsers();
   }, []);
 
   const onApprove = (id) => {
@@ -79,33 +74,7 @@ const PendingApprovals = () => {
       .catch(function (error) {
         console.log(error);
       }).then(() => {
-        alert('Your post has been moved to recycle bin')
-        window.location.reload();
-      })
-  }
-
-  const onDeleteUser = (id) => {
-    const FormData = require('form-data');
-    let data = new FormData();
-    data.append('action', 'delete');
-    data.append('id', id);
-    data.append('status', 'Deleted');
-    let config = {
-
-      method: 'post',
-      url: 'http://localhost/myblogRecyclebin.php',
-      headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
-      ,
-      data: data
-    };
-
-    axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-      .catch(function (error) {
-        console.log(error);
-      }).then(() => {
-        alert('Your post has been moved to recycle bin')
+        alert('Your post has been deleted permanently')
         window.location.reload();
       })
   }
@@ -118,10 +87,11 @@ const PendingApprovals = () => {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   };
+
   return (
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        {UserRole === 'Admin' ? <h2>Pending Approvals</h2> : <h2>My Pending Approvals</h2>}
+        <h2>All Blog Posts</h2>
       </div>
       <div className="row g-5">
         <div className="col-md-8" style={{ width: '100%' }}>
@@ -136,9 +106,10 @@ const PendingApprovals = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">UserName</th>
-                      <th scope="col" style={{ width: '30%' }}>Title</th>
+                      <th scope="col" style={{ width: '20%' }}>Title</th>
                       <th scope="col" style={{ width: '30%' }}>Blog</th>
                       <th scope="col">Status</th>
+                      <th scope="col" style={{ width: '5%' }}>Access</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
@@ -149,14 +120,17 @@ const PendingApprovals = () => {
                         <tr>
                           <td index={index}>{index + 1}</td>
                           <td>{data.name}</td>
-                          <td >{data.title}</td>
+                          <td>{data.title}</td>
                           <td style={textStyle}>{data.post}</td>
                           <td>{data.status}</td>
-                          <td>{UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
+                          <td style={{ maxWidth: '20%' }}>{data.user}</td>
+                          <td>{UserRole === 'Admin' && data.status === 'Pending Approval' ? <><button className="btn btn-primary">Edit</button>
                             <button className="btn btn-danger" onClick={() => onDeleteAdmin(data.id)}>Permanently Delete</button>
-                            <button className="btn btn-success" onClick={() => onApprove(data.id)}>Approve</button></> :
-                            <><button className="btn btn-primary">Edit</button>
-                              <button className="btn btn-danger" onClick={() => onDeleteUser(data.id)}>Delete</button></>}</td>
+                            <button className="btn btn-success" onClick={() => onApprove(data.id)}>Approve</button>
+                          </> : UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
+
+                            <button className="btn btn-danger" onClick={() => onDeleteAdmin(data.id)}>Permanently Delete</button>
+                          </> : null}</td>
                         </tr>
                       </>
                     })}
@@ -174,4 +148,4 @@ const PendingApprovals = () => {
 }
 
 
-export default PendingApprovals
+export default AllPosts
