@@ -22,13 +22,13 @@ const CreatePost = () => {
 
     const [convertedText, setConvertedText] = useState("");
     const [blogTitle, setBlogTitle] = useState('');
-    const [blogPost, setBlogPost] = useState("");
+    //const [blogPost, setBlogPost] = useState("");
     const [Category, setCategory] = useState([]);
     const [selected, setSelected] = useState('');
 
     const handleChange = event => {
-        console.log('Label 👉️', event.target.selectedOptions[0].label);
-        console.log(event.target.value);
+        //console.log('Label 👉️', event.target.selectedOptions[0].label);
+        //console.log(event.target.value);
         setSelected(event.target.value);
     };
 

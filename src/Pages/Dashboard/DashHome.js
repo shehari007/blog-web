@@ -8,6 +8,7 @@ import AllPosts from '..//..//Pages/AllPosts/AllPosts'
 import MyDeletedPosts from '..//..//Pages/MyDeletedPosts/MyDeletedPosts'
 import PendingApprovals from '..//..//Pages/PendingApprovals/PendingApprovals'
 import secureLocalStorage from "react-secure-storage";
+import AddNewCategory from '..//..//Pages/NewCategory/NewCategory'
 import CryptoJS from 'crypto-js';
 import { useParams } from 'react-router-dom'
 
@@ -70,6 +71,12 @@ const DashHome = () => {
                                     </a>
                                 </li>
                                 <li className="nav-item">
+                                    <a className="nav-link" href="/dashboard/Add New Category">
+                                        <span data-feather="layers" className="align-text-bottom"></span>
+                                        Add New Category
+                                    </a>
+                                </li>
+                                <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/profile">
                                         <span data-feather="layers" className="align-text-bottom"></span>
                                         Profile Details
@@ -86,6 +93,7 @@ const DashHome = () => {
                     {pageName === 'Create A New Post' ? <CreatePost /> : null}
                     {pageName === 'My Deleted Posts' ? <MyDeletedPosts /> : null}
                     {pageName === 'All Posts' && UserRole==='Admin' ? <AllPosts /> : null}
+                    {pageName === 'Add New Category' && UserRole==='Admin'? <AddNewCategory /> : null}
                 </div>
             </div></>
 
