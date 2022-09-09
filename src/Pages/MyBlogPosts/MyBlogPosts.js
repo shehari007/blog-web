@@ -91,6 +91,16 @@ const MyBlogPosts = () => {
     textOverflow: 'ellipsis',
   };
 
+  const setData = (data) => {
+    let { id, name, title, post, category, status } = data;
+    secureLocalStorage.setItem('id', id);
+    secureLocalStorage.setItem('name', name);
+    secureLocalStorage.setItem('title', title);
+    secureLocalStorage.setItem('post', post);
+    secureLocalStorage.setItem('category', category);
+    secureLocalStorage.setItem('status', status);
+}
+
   return (
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -102,8 +112,6 @@ const MyBlogPosts = () => {
             {infoStatus === '0 results[]' ? <><h1>No Posts Found!</h1><a href="/dashboard">Create a new post?</a></>
               :
               <>
-                
-                
                 <div class="table-responsive">
                   <table class="table table-striped table-sm">
                     <thead>
@@ -126,7 +134,7 @@ const MyBlogPosts = () => {
                             <td style={textStyle}>{data.post}</td>
                             <td>{data.status}</td>
                             <td>{data.category}</td>
-                            <td>{UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
+                            <td>{UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                               <button className="btn btn-danger"onClick={() => onDelete(data.id)}>Delete</button>
                               </> : 
                               <><button className="btn btn-primary">Edit</button>

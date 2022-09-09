@@ -7,6 +7,8 @@ import CreatePost from '..//..//Pages/CreatePost/CreatePost'
 import AllPosts from '..//..//Pages/AllPosts/AllPosts'
 import MyDeletedPosts from '..//..//Pages/MyDeletedPosts/MyDeletedPosts'
 import PendingApprovals from '..//..//Pages/PendingApprovals/PendingApprovals'
+import EditPosts from '..//..//Pages/EditPosts/EditPosts'
+import EditCategory from '..//..//Pages/EditCategory/EditCategory'
 import secureLocalStorage from "react-secure-storage";
 import AddNewCategory from '..//..//Pages/NewCategory/NewCategory'
 import CryptoJS from 'crypto-js';
@@ -94,6 +96,8 @@ const DashHome = () => {
                     {pageName === 'My Deleted Posts' ? <MyDeletedPosts /> : null}
                     {pageName === 'All Posts' && UserRole==='Admin' ? <AllPosts /> : null}
                     {pageName === 'Add New Category' && UserRole==='Admin'? <AddNewCategory /> : null}
+                    {pageName === 'EditCategory' && UserRole==='Admin'? <EditCategory /> : null}
+                    {pageName === 'EditPosts' && UserRole==='Admin'? <EditPosts /> : null}
                 </div>
             </div></>
 
