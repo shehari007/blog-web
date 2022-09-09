@@ -10,9 +10,8 @@ import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard/DashHome';
 import ProtectedRoute from './ProtectedRoute';
 import { Fragment } from 'react';
-import Profile from './Pages/Profile/Profile';
 import Userposts from './Pages/UserPosts/UserPosts'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   
   return (
