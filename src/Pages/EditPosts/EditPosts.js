@@ -3,8 +3,19 @@ import { useEffect, useState } from 'react';
 import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
+
+const role = secureLocalStorage.getItem('setRole')
+const Username = secureLocalStorage.getItem('UserDetail')
+
+if (role) {
+    var decryptedToken = CryptoJS.AES.decrypt(role, 'Secret Pharase');
+    var UserRole = decryptedToken.toString(CryptoJS.enc.Utf8);
+    var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
+    var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
+}
 
 const EditPosts = () => {
 
@@ -53,7 +64,7 @@ const EditPosts = () => {
         data.append('title', title);
         data.append('post', post);
         data.append('category', category);
-        data.append('status', 'Approved');
+        data.append('status', status);
 
         let config = {
 
@@ -77,7 +88,50 @@ const EditPosts = () => {
                 secureLocalStorage.removeItem('category');
                 secureLocalStorage.removeItem('status');
                 secureLocalStorage.removeItem('name');
-                history('/dashboard/My Blog Posts');
+                {
+                    name === username ? history('/dashboard/My Blog Posts')
+                    :
+                    history('/dashboard/Pending Approvals')
+                }
+
+                window.location.reload();
+            })
+    }
+
+    const UserpostData = () => {
+
+        const FormData = require('form-data');
+        let data = new FormData();
+        data.append('action', 'update');
+        data.append('id', id);
+        data.append('title', title);
+        data.append('post', post);
+        data.append('category', category);
+        data.append('status', status);
+
+        let config = {
+
+            method: 'post',
+            url: 'http://localhost/editposts.php',
+            headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+            ,
+            data: data
+        };
+
+        axios(config).then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+            .catch(function (error) {
+                console.log(error);
+            }).then(() => {
+                alert('You Post successfully updated');
+                secureLocalStorage.removeItem('id');
+                secureLocalStorage.removeItem('title');
+                secureLocalStorage.removeItem('post');
+                secureLocalStorage.removeItem('category');
+                secureLocalStorage.removeItem('status');
+                secureLocalStorage.removeItem('name');
+                history('/dashboard/Pending Approvals');
                 window.location.reload();
             })
     }
@@ -86,7 +140,7 @@ const EditPosts = () => {
     return (
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h2>Edit Category
+                <h2>Edit Blog Post
                 </h2>
             </div>
             <div style={{ width: '100%' }}>
@@ -99,7 +153,7 @@ const EditPosts = () => {
                 <label htmlFor="title" class="form-label">Blog Title</label>
                 <input type="text" class="form-control" id="title" value={title} onChange={(e) => setTitles(e.target.value)} />
                 <label htmlFor="category" class="form-label">Category</label>
-                <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" value={category} onChange={handleChange}>
+                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" value={category} onChange={handleChange}>
                     <option value="">Select Category</option>
                     {categoryData.map((data, index) => {
                         return <>
@@ -116,7 +170,9 @@ const EditPosts = () => {
                     />
                 </div>
                 <br />
-                <button type='submit' class="btn btn-success" onClick={postData}>Update Post</button>
+                {UserRole === 'Admin' ? <button type='submit' class="btn btn-success" onClick={postData}>Update Post</button>
+                    :
+                    <button type='submit' class="btn btn-success" onClick={UserpostData}>Update Post</button>}
             </div>
         </main>
     )

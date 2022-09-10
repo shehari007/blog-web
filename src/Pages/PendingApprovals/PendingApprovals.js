@@ -110,14 +110,17 @@ const PendingApprovals = () => {
       })
   }
 
-  const textStyle = {
-    maxWidth: '100%',
-    display: '-webkit-box',
-    WebkitBoxOrient: 'vertical',
-    WebkitLineClamp: 2,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  };
+  const setData = (data) => {
+    let { id, name, title, post, category, status } = data;
+    secureLocalStorage.setItem('id', id);
+    secureLocalStorage.setItem('name', name);
+    secureLocalStorage.setItem('title', title);
+    secureLocalStorage.setItem('post', post);
+    secureLocalStorage.setItem('category', category);
+    secureLocalStorage.setItem('status', status);
+}
+
+
   return (
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -128,17 +131,15 @@ const PendingApprovals = () => {
           {infoStatus === '0 results[]' ? <><h1>No Posts Found!</h1></>
             :
             <>
-
-
               <div class="table-responsive">
                 <table class="table table-striped table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">UserName</th>
-                      <th scope="col" style={{ width: '30%' }}>Title</th>
-                      <th scope="col" style={{ width: '30%' }}>Blog</th>
-                      <th scope="col">Status</th>
+                      <th scope="col" style={{ width: '15%' }}>Title</th>
+                      <th scope="col" style={{ width: '15%' }}>Blog</th>
+                      <th scope="col" style={{ width: '15%' }}>Status</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
@@ -150,12 +151,12 @@ const PendingApprovals = () => {
                           <td index={index}>{index + 1}</td>
                           <td>{data.name}</td>
                           <td >{data.title}</td>
-                          <td style={textStyle}>{data.post}</td>
+                          <td><span class="d-inline-block text-truncate" style={{maxWidth: '150px'}}>{data.post}</span></td>
                           <td>{data.status}</td>
-                          <td>{UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
+                          <td>{UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                             <button className="btn btn-danger" onClick={() => onDeleteAdmin(data.id)}>Permanently Delete</button>
                             <button className="btn btn-success" onClick={() => onApprove(data.id)}>Approve</button></> :
-                            <><button className="btn btn-primary">Edit</button>
+                            <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                               <button className="btn btn-danger" onClick={() => onDeleteUser(data.id)}>Delete</button></>}</td>
                         </tr>
                       </>

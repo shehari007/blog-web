@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Banner from '..//..//Components/MainBanner/MainBanner'
+import parse from 'html-react-parser';
 
 const UserPosts = () => {
 
@@ -48,7 +49,7 @@ const UserPosts = () => {
               <article className="blog-post">
                 <h2 className="blog-post-title mb-1">{data.title}</h2>
                 <p className="blog-post-meta">January 1, 2021 by <a href={profilePosts}>{data.name}</a></p>
-                <p style={textStyle}>{data.post}</p>
+                <p style={textStyle}>{parse(data.post)}</p>
                 <a href={link} >Continue reading</a> </article>
             </>
           })}</>

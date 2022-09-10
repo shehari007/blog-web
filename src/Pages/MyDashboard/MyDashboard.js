@@ -83,8 +83,10 @@ const MyDashboard = () => {
                 <div className="col-md-2 offset-md-1">
                     <div class="card text-bg-danger" style={{ width: '18rem', height: '6rem' }}>
                         <div class="card-body">
-                            <h5 class="card-title">Pending Approvals ({myApprovals})
-                            </h5>
+                            {UserRole==='Admin'?<h5 class="card-title">Pending Approvals ({myApprovals})
+                            </h5> : <h5 class="card-title">My Pending Approvals ({myApprovals})
+                            </h5>}
+                            
                             <a href={"/dashboard/Pending Approvals"} class="card-link"><button class="btn btn-light">Pending Approvals</button></a>
                         </div>
                     </div>

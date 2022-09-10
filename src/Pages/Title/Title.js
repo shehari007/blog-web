@@ -34,10 +34,7 @@ const Title = () => {
                             </article>
                         </>
                     })}
-                    <nav className="blog-pagination" aria-label="Pagination">
-                        <a className="btn btn-outline-primary rounded-pill" href="localhost:3000">Older</a>
-                        <a className="btn btn-outline-secondary rounded-pill disabled" href="http://localhost:3000">Newer</a>
-                    </nav>
+                    
 
                 </div>
                 <div className="col-md-4">

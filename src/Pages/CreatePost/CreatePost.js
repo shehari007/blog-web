@@ -5,9 +5,11 @@ import secureLocalStorage from "react-secure-storage";
 import CryptoJS from 'crypto-js';
 import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
+import { useNavigate } from 'react-router';
 
 const CreatePost = () => {
 
+    let history = useNavigate();
     var status = ''
     const role = secureLocalStorage.getItem('setRole')
     const Username = secureLocalStorage.getItem('UserDetail')
@@ -18,6 +20,7 @@ const CreatePost = () => {
         var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
         var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
     }
+    console.log(username);
 
     { UserRole === 'Admin' ? status = 'Approved' : status = 'Pending Approval' }
 
@@ -35,7 +38,6 @@ const CreatePost = () => {
 
         var title = document.getElementById('blogtitle').value;
         var post = convertedText;
-        alert(convertedText)
         const FormData = require('form-data');
         let data = new FormData();
         data.append('action', 'add');
@@ -45,7 +47,7 @@ const CreatePost = () => {
         data.append('user', UserRole);
         data.append('name', username);
         data.append('status', status)
-
+        
         let config = {
 
             method: 'post',
@@ -53,7 +55,7 @@ const CreatePost = () => {
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
-        };
+        }
 
         axios(config).then(function (response) {
             console.log(JSON.stringify(response.data));
@@ -61,8 +63,8 @@ const CreatePost = () => {
             .catch(function (error) {
                 console.log(error);
             }).then(() => {
-                alert('new post added')
-                window.location.reload();
+                alert('Post Added Successfully');
+                {UserRole==='Admin'? history('/dashboard/My Blog Posts'): history('/dashboard/Pending Approvals')}
             })
     }
 
@@ -75,20 +77,53 @@ const CreatePost = () => {
         menuData();
     }, []);
 
+    
+
     const addCat = () => {
 
-        var category = document.getElementById('categoryfield').value;
-        console.log(category);
+        var category1 = document.getElementById('categoryfield').value;
+        console.log(category1);
         const FormData = require('form-data');
         let data = new FormData();
         data.append('action', 'add');
-        data.append('cat', category);
-        data.append('status', 'Approved');
+        data.append('cat', category1);
+        data.append('status', status);
 
         let config = {
 
             method: 'post',
             url: 'http://localhost/addnewcategory.php',
+            headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+            ,
+            data: data
+        };
+
+        axios(config).then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+            .catch(function (error) {
+                console.log(error);
+            }).then(() => {
+                alert('New Category Added Successfully');
+                Refresh();
+            })
+    }
+
+    const reqCat = () => {
+
+        var category1 = document.getElementById('categoryfield').value;
+        console.log(category1);
+        const FormData = require('form-data');
+        let data = new FormData();
+        data.append('action', 'req');
+        data.append('cat', category1);
+        data.append('status', status);
+        data.append('username', username);
+
+        let config = {
+
+            method: 'post',
+            url: 'http://localhost/reqnewcategory.php',
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
@@ -124,9 +159,9 @@ const CreatePost = () => {
             </div>
             <div style={{ width: '100%' }}>
                 <label htmlFor="blogtitle" class="form-label">Blog Title</label>
-                <input type="text" class="form-control" id="blogtitle" />
+                <input type="text" class="form-control" id="blogtitle" required/>
                 <br />
-                <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" value={selected} onChange={handleChange}>
+                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" value={selected} onChange={handleChange} required>
                     <option value="">Select Category</option>
                     {Category.map((data, index) => {
                         return <>
@@ -134,9 +169,15 @@ const CreatePost = () => {
                         </>
                     })}
                 </select>
-                <label htmlFor="categoryfield" className="form-label">Add New Category</label>
+                {UserRole==='Admin'?
+                <><label htmlFor="categoryfield" className="form-label">Add New Category</label>
                 <input type="text" class="form-control" id="categoryfield" /><br />
-                <button className="btn btn-primary" type="submit" onClick={addCat}>Add Category</button>
+                <button className="btn btn-primary" type="submit" onClick={addCat}>Add Category</button></>
+                 :
+                 <><label htmlFor="categoryfield" className="form-label">Request to Add New Category</label>
+                <input type="text" class="form-control" id="categoryfield" /><br />
+                <button className="btn btn-primary" type="submit" onClick={reqCat}>Request</button></>
+                 }
                 <br />
                 <br />
                 <div>
