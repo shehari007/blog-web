@@ -107,6 +107,32 @@ const MyDeletedPosts = () => {
       })
   }
 
+  const onDeletAll = () => {
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'delete');
+    data.append('username', username);
+    data.append('status', 'Deleted');
+    let config = {
+
+      method: 'post',
+      url: 'http://localhost/deleteall.php',
+      headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+      ,
+      data: data
+    };
+
+    axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => {
+        alert('All post has been Permanently deleted')
+        window.location.reload();
+      })
+  }
+
   const textStyle = {
     maxWidth: '100%',
     display: '-webkit-box',
@@ -119,6 +145,8 @@ const MyDeletedPosts = () => {
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h2>My Deleted Posts</h2>
+      {infoStatus !=='0 results[]'? <button className="btn btn-danger" onClick={() => onDeletAll()}>Permanantly Delete All</button>:null}
+     
       </div>
         <div className="row g-5">
           <div className="col-md-8" style={{ width: '100%' }}>

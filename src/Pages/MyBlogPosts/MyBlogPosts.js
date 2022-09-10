@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import Banner from '..//..//Components/MainBanner/MainBanner'
 import secureLocalStorage from "react-secure-storage";
 import CryptoJS from 'crypto-js'
 const MyBlogPosts = () => {
@@ -118,7 +116,7 @@ const MyBlogPosts = () => {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col" style={{ width: '20%' }}>Title</th>
-                        <th scope="col" style={{ width: '30%' }}>Blog</th>
+                        <th scope="col" style={{ width: '15%' }}>Blog</th>
                         <th scope="col">Status</th>
                         <th scope="col">Category</th>
                         <th scope="col">Actions</th>
@@ -131,7 +129,7 @@ const MyBlogPosts = () => {
                           <tr>
                             <td index={index}>{index + 1}</td>
                             <td >{data.title}</td>
-                            <td style={textStyle}>{data.post}</td>
+                            <td><span class="d-inline-block text-truncate" style={{maxWidth: '150px'}}>{data.post}</span></td>
                             <td>{data.status}</td>
                             <td>{data.category}</td>
                             <td>{UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>

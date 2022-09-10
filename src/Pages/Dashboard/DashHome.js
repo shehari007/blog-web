@@ -72,12 +72,12 @@ const DashHome = () => {
                                         My Deleted Posts
                                     </a>
                                 </li>
-                                <li className="nav-item">
+                                {UserRole==='Admin'?<><li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Add New Category">
                                         <span data-feather="layers" className="align-text-bottom"></span>
                                         Add New Category
                                     </a>
-                                </li>
+                                </li></> : null}
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/profile">
                                         <span data-feather="layers" className="align-text-bottom"></span>
@@ -97,7 +97,7 @@ const DashHome = () => {
                     {pageName === 'All Posts' && UserRole==='Admin' ? <AllPosts /> : null}
                     {pageName === 'Add New Category' && UserRole==='Admin'? <AddNewCategory /> : null}
                     {pageName === 'EditCategory' && UserRole==='Admin'? <EditCategory /> : null}
-                    {pageName === 'EditPosts' && UserRole==='Admin'? <EditPosts /> : null}
+                    {pageName === 'EditPosts'? <EditPosts /> : null}
                 </div>
             </div></>
 

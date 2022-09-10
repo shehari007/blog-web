@@ -47,7 +47,7 @@ const NewCategory = () => {
 
     useEffect(() => {
         const menuData = async () => {
-            const res = await axios('http://localhost/menucategories.php?action=menu');
+            const res = await axios('http://localhost/adminMenucategory.php?action=menu');
             setInfoStatus(res.data);
         };
         menuData();

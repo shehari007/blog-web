@@ -22,7 +22,8 @@ const EditCategory = () => {
         data.append('action', 'update');
         data.append('id', id)
         data.append('category', category);
-        data.append('status', 'Approved');
+        data.append('status', status
+        );
 
         let config = {
 
@@ -58,7 +59,7 @@ const EditCategory = () => {
                 <input type="text" class="form-control" id="id" value={id} disabled />
                 <label htmlFor="nameofcategory" class="form-label">Edit Name of Category</label>
                 <input type="text" class="form-control" id="nameofcategory" value={category} onChange={(e) => setCategory(e.target.value)} />
-                <label htmlFor="status" class="form-label">Edit Name of Category</label>
+                <label htmlFor="status" class="form-label">Status</label>
                 <input type="text" class="form-control" id="status" value={status} disabled />
                 <br />
                 <button type='submit' class="btn btn-success" onClick={postData}>Update Category</button>

@@ -118,7 +118,7 @@ const AllPosts = () => {
                       <th scope="col">#</th>
                       <th scope="col">UserName</th>
                       <th scope="col" style={{ width: '20%' }}>Title</th>
-                      <th scope="col" style={{ width: '30%' }}>Blog</th>
+                      <th scope="col" style={{ width: '15%' }}>Blog</th>
                       <th scope="col">Status</th>
                       <th scope="col">Categpry</th>
                       <th scope="col" style={{ width: '5%' }}>Access</th>
@@ -132,8 +132,8 @@ const AllPosts = () => {
                         <tr>
                           <td index={index}>{index + 1}</td>
                           <td>{data.name}</td>
-                          <td>{data.title}</td>
-                          <td style={textStyle}>{data.post}</td>
+                          <td >{data.title}</td>
+                          <td><span class="d-inline-block text-truncate" style={{maxWidth: '150px'}}>{data.post}</span></td>
                           <td>{data.status}</td>
                           <td>{data.category}</td>
                           <td style={{ maxWidth: '20%' }}>{data.user}</td>
