@@ -20,7 +20,7 @@ const CreatePost = () => {
         var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
         var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
     }
-    console.log(username);
+    //console.log(username);
 
     { UserRole === 'Admin' ? status = 'Approved' : status = 'Pending Approval' }
 
@@ -105,6 +105,7 @@ const CreatePost = () => {
                 console.log(error);
             }).then(() => {
                 alert('New Category Added Successfully');
+                document.getElementById('categoryfield').value = '';
                 Refresh();
             })
     }
@@ -135,7 +136,8 @@ const CreatePost = () => {
             .catch(function (error) {
                 console.log(error);
             }).then(() => {
-                alert('New Category Added Successfully');
+                alert('New Category Requested Successfully');
+                document.getElementById('categoryfield').value = '';
                 Refresh();
             })
     }

@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import parse from 'html-react-parser'
 const MainCards = () => {
   const textStyle = {
     maxWidth: '100%',
     display: '-webkit-box',
     WebkitBoxOrient: 'vertical',
-    WebkitLineClamp: 3,
+    WebkitLineClamp: 2,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   };
@@ -42,7 +43,7 @@ const MainCards = () => {
                   <strong className="d-inline-block mb-2 text-primary">{data.category}</strong>
                   <h3 className="mb-0" style={textStyleHead}>{data.title}</h3>
                   <div className="mb-1 text-muted">Nov 12</div>
-                  <p className="card-text mb-auto" style={textStyle}>{data.post}</p>
+                  <p className="card-text mb-auto" style={textStyle}>{parse(data.post)}</p>
                   <a href={link} >Continue reading</a>
 
                 </div>

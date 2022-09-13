@@ -1,150 +1,365 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Upload from '..//..//Components/PicUpload/Upload'
+import axios from 'axios';
+import secureLocalStorage from "react-secure-storage";
+import CryptoJS from 'crypto-js';
+import { useNavigate } from 'react-router';
 
 const Profile = () => {
+  let history = useNavigate();
+  const role = secureLocalStorage.getItem('setRole')
+  const Username = secureLocalStorage.getItem('UserDetail')
+
+  if (role) {
+    var decryptedToken = CryptoJS.AES.decrypt(role, 'Secret Pharase');
+    var UserRole = decryptedToken.toString(CryptoJS.enc.Utf8);
+    var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
+    var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
+  }
+
+  const [dosyaname, setdosyaname] = useState([]);
+  const [postCount, setMyPostCount] = useState([]);
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+
+    const getData = async () => {
+      const res = await axios(`http://localhost/userdata.php`);
+      console.log(res.data);
+      setUserData(res.data);
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+
+    const getData = async () => {
+      const res = await axios(`http://localhost/mypostscount.php?username=${username}`);
+      console.log(res.data);
+      setMyPostCount(res.data);
+    };
+    getData();
+  }, []);
+
+
+
+
+  const CurrentPass = () => {
+
+    var currentpass = document.getElementById('floatingPassword').value;
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'pass');
+    data.append('currpass', currentpass);
+    data.append('name', username);
+
+    let config = {
+
+      method: 'post',
+      url: 'http://localhost/currentpassword.php',
+      headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+      ,
+      withCredentials: false,
+      data: data
+
+    };
+
+    axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+      if (response.data !== 'true[]') {
+        alert('Current Password is wrong try again');
+        window.location.reload();
+      } else if (response.data === 'true[]') {
+
+        var newpassword = document.getElementById('floatingPassword1').value;
+        const FormData = require('form-data');
+        let data = new FormData();
+        data.append('action', 'pass');
+        data.append('pass', newpassword);
+        data.append('name', username);
+
+        let config = {
+
+          method: 'post',
+          url: 'http://localhost/newpassword.php',
+          headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+          ,
+          withCredentials: false,
+          data: data
+
+        };
+
+        axios(config).then(function (response) {
+          console.log(JSON.stringify(response.data));
+          if (response.data === true) {
+            alert('Password Updated successfully')
+          } else if (response.data !== true) {
+            alert('Something went wrong')
+          }
+        })
+          .catch(function (error) {
+            console.log(error);
+          }).then(() => {
+
+          })
+
+      }
+    })
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => {
+
+      })
+  }
+
+  const CurrentEmail = () => {
+
+    var currentemail = document.getElementById('floatingEmail').value;
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'pass');
+    data.append('email', currentemail);
+    data.append('name', username);
+
+    let config = {
+
+      method: 'post',
+      url: 'http://localhost/currentemailaddress.php',
+      headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+      ,
+      withCredentials: false,
+      data: data
+
+    };
+
+    axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+      if (response.data !== 'true[]') {
+        alert('Current Email is wrong try again');
+        window.location.reload();
+      } else if (response.data === 'true[]') {
+
+        var newemail = document.getElementById('floatingEmail1').value;
+        const FormData = require('form-data');
+        let data = new FormData();
+        data.append('action', 'pass');
+        data.append('email', newemail);
+        data.append('name', username);
+
+        let config = {
+
+          method: 'post',
+          url: 'http://localhost/newemailaddress.php',
+          headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+          ,
+          withCredentials: false,
+          data: data
+
+        };
+
+        axios(config).then(function (response) {
+          console.log(JSON.stringify(response.data));
+          if (response.data === true) {
+            alert('Email Updated successfully')
+          } else if (response.data !== true) {
+            alert('Something went wrong')
+          }
+        })
+          .catch(function (error) {
+            console.log(error);
+          }).then(() => {
+
+          })
+
+      }
+    })
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => {
+
+      })
+  }
+
+  const onDeleteUserData = (name) => {
+    console.log(name);
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'delete');
+    data.append('name', name);
+    data.append('user',UserRole);
+
+    let config = {
+
+        method: 'post',
+        url: 'http://localhost/DELETEACCOUNT.php',
+        headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+        ,
+        data: data
+    };
+
+    axios(config).then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+        .catch(function (error) {
+            console.log(error);
+        }).then(() => {
+            // alert('Category Deleted Successfully')
+            // window.location.reload();
+        })
+}
+
+  const DELETEACCOUNT = () => {
+
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'confirm');
+    data.append('email', document.getElementById('deleteemail').value);
+    data.append('pass', document.getElementById('floatingpass2').value);
+    data.append('user', UserRole);
+    data.append('name', username);
+
+    let config = {
+
+      method: 'post',
+      baseURL: 'http://localhost/DELETEACCOUNT.php',
+      withCredentials: false,
+      data: data
+    };
+
+    axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+      if (response.data !== 'true[]') {
+        alert('Email or Password is incorrect, try again');
+      } else if (response.data === 'true[]') {
+        alert('Account deleted successfully')
+        secureLocalStorage.clear();
+        history('/signup');
+      }
+    }).catch(function (error) {
+      console.log(error);
+    }).then(() => {
+    })
+  }
+
+  useEffect(() => {
+    console.log(`http://localhost/img.php`)
+    const getDetails = async () => {
+      const res = await axios(`http://localhost/img.php`);
+      console.log(res.data);
+      setdosyaname(res.data);
+    };
+    getDetails();
+  }, []);
+  var pic = ''
+
   return (
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
-        </div>
+        <h1 class="h2">Profile Settings</h1>
       </div>
+      <div class="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        {dosyaname !== '0 results[]' ? dosyaname.map((data) => {
+          pic = "/" + data.filename
 
-      <h2>Section title</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>text</td>
-              <td>random</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>placeholder</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>placeholder</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>irrelevant</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>text</td>
-              <td>placeholder</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>visual</td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>random</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>text</td>
-            </tr>
-          </tbody>
-        </table>
+        }) : pic = "/default.jpg"}
+        <label>
+          <img src={pic} class="img-thumbnail" alt="..." style={{ width: '150px', height: '150px', borderRadius: '75%' }}></img>
+          <Upload />
+        </label>
+
+        <ul>
+          <li>My Total Posts: {postCount}</li>
+          <li>Total Likes: 0</li>
+          <li>Access Mode: {UserRole}</li>
+        </ul>
+
       </div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Security Settings</h1>
+      </div>
+      <div class="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div style={{ maxWidth: '30%' }}>
+          <h4>Change Password</h4>
+          <div className="form-floating">
+            <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" />
+            <label htmlFor="floatingPassword">Enter Current Password</label>
+          </div>
+          <br />
+          <div className="form-floating">
+            <input type="password" className="form-control" id="floatingPassword1" name="password" placeholder="Password" />
+            <label htmlFor="floatingPassword">Enter New Password</label>
+          </div>
+          <br />
+          <button type="submit" className='btn btn-primary' onClick={CurrentPass}>Change Password</button>
+        </div>
+        <div style={{ maxWidth: '30%', marginLeft: '10%' }}>
+          <h4>Change Email Address</h4>
+          <div className="form-floating">
+            <input type="email" className="form-control" id="floatingEmail" name="email" placeholder="email" />
+            <label htmlFor="floatingPassword">Enter Current Email</label>
+          </div>
+          <br />
+          <div className="form-floating">
+            <input type="email" className="form-control" id="floatingEmail1" name="email" placeholder="email" />
+            <label htmlFor="floatingPassword">Enter New Email</label>
+          </div>
+          <br />
+          <button type="submit" className='btn btn-primary' onClick={CurrentEmail}>Change Email</button>
+        </div>
+        {UserRole !== 'Admin' ? <>
+          <div style={{ maxWidth: '30%', marginLeft: '10%' }}>
+            <h4>DELETE PROFILE</h4>
+            <div className="form-floating">
+              <input type="email" className="form-control" id="deleteemail" name="email" placeholder="email" />
+              <label htmlFor="deletemail">Enter Current Email</label>
+            </div>
+            <br />
+            <div className="form-floating">
+              <input type="password" className="form-control" id="floatingpass2" name="pass" placeholder="email" />
+              <label htmlFor="floatingPass1">Enter Current Password</label>
+            </div>
+            <br />
+            <button type="submit" className='btn btn-danger' onClick={DELETEACCOUNT}>Delete Account</button>
+
+          </div>
+          <div style={{ maxWidth: '30%', marginLeft: '10%' }}>
+            <p style={{ fontStyle: 'italic' }}>*warning! if you delete your profile, all posts, categories, access will be deleted<br />and it cannot be undone
+              Please make sure before deleting!*<br /></p>
+          </div></> : null}
+      </div>
+      <div>{UserRole === 'Admin' ? <>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h4>User DATA</h4>
+      </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col" style={{ width: '20%' }}>Username</th>
+                  <th scope="col" style={{ width: '15%' }}>Email</th>
+                  <th scope="col">Access</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userData.map((data, index) =>{
+                  return <>
+                  <tr>
+                  <td index={index}>{index+1}</td>
+                  <td>{data.name}</td>
+                  <td>{data.email}</td>
+                  <td>{data.role}</td>
+                  <td><button className='btn btn-danger'onClick={() => onDeleteUserData(data.name)}>Delete</button>
+                  <button className='btn btn-success'>Promote to Admin</button></td>
+                  </tr>
+                  </>
+                })}
+              </tbody>
+            </table>
+          </div>
+        </> : null}</div>
     </main>
   )
 }

@@ -82,16 +82,20 @@ const EditPosts = () => {
                 console.log(error);
             }).then(() => {
                 alert('You Post successfully updated');
-                secureLocalStorage.removeItem('id');
-                secureLocalStorage.removeItem('title');
-                secureLocalStorage.removeItem('post');
-                secureLocalStorage.removeItem('category');
-                secureLocalStorage.removeItem('status');
-                secureLocalStorage.removeItem('name');
+                // secureLocalStorage.removeItem('id');
+                // secureLocalStorage.removeItem('title');
+                // secureLocalStorage.removeItem('post');
+                // secureLocalStorage.removeItem('category');
+                // secureLocalStorage.removeItem('status');
+                // secureLocalStorage.removeItem('name');
                 {
                     name === username ? history('/dashboard/My Blog Posts')
-                    :
-                    history('/dashboard/Pending Approvals')
+                        :
+                        history('/dashboard/Pending Approvals')
+                }
+                {
+                    secureLocalStorage.getItem('route')==='All Posts' ? 
+                    history('/dashboard/All Posts') : secureLocalStorage.removeItem('route');
                 }
 
                 window.location.reload();
@@ -107,7 +111,7 @@ const EditPosts = () => {
         data.append('title', title);
         data.append('post', post);
         data.append('category', category);
-        data.append('status', status);
+        data.append('status', 'Pending Approval');
 
         let config = {
 
@@ -148,8 +152,10 @@ const EditPosts = () => {
                 <input type="text" class="form-control" id="id" value={id} disabled />
                 <label htmlFor="name" class="form-label">Username</label>
                 <input type="text" class="form-control" id="name" value={name} disabled />
-                <label htmlFor="status" class="form-label">Status</label>
-                <input type="text" class="form-control" id="status" value={status} disabled />
+                {UserRole === 'Admin' ? <><label htmlFor="status" class="form-label">Status</label>
+                    <input type="text" class="form-control" id="status" value={status} disabled /></> :
+                    <><label htmlFor="status" class="form-label">Status (Will Change to Approval If you Edit your post)</label>
+                        <input type="text" class="form-control" id="status" value={status} disabled /></>}
                 <label htmlFor="title" class="form-label">Blog Title</label>
                 <input type="text" class="form-control" id="title" value={title} onChange={(e) => setTitles(e.target.value)} />
                 <label htmlFor="category" class="form-label">Category</label>
@@ -166,7 +172,7 @@ const EditPosts = () => {
                         theme='snow'
                         value={post}
                         onChange={setPost}
-                        style={{ minHeight: '300px' }}
+                        style={{ minHeight: '300px', overflow: 'auto', maxHeight: '350px' }}
                     />
                 </div>
                 <br />

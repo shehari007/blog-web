@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import parse from 'html-react-parser'
 
 
 const MainBanner = () => {
@@ -29,7 +30,7 @@ const MainBanner = () => {
                     return (
                         <React.Fragment key={data.id}>
                             <h1 className="display-4 fst-italic">{data.title}</h1>
-                            <p className="lead my-3" style={textStyle}>{data.post}</p>
+                            <p className="lead my-3" style={textStyle}>{parse(data.post)}</p>
                             <p className="lead mb-0"><a href={link} className="text-white fw-bold">Continue reading...</a></p>
                         </React.Fragment>
                     )

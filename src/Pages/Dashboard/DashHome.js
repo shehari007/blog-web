@@ -35,55 +35,70 @@ const DashHome = () => {
                     <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style={{ position: "relative" }}>
                         <div className="position-sticky pt-3 sidebar-sticky">
                             <ul className="nav flex-column">
-                                <li className="nav-item">
-                                    <a className={"nav-link"} aria-current="page" href="/dashboard/My Dashboard">
-                                        <span data-feather="home" className="align-text-bottom"></span>
-                                        My Dashboard
-                                    </a>
-                                </li>
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                    <li className="nav-item">
+                                        <a className={"nav-link"} aria-current="page" href="/dashboard/My Dashboard">
+                                            <span data-feather="home" className="align-text-bottom"></span>
+                                            My Dashboard
+                                        </a>
+                                    </li>
+                                </div>
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Pending Approvals">
                                         <span data-feather="file" className="align-text-bottom"></span>
                                         Pending Approvals
                                     </a>
                                 </li>
+                                </div>
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/My Blog Posts">
                                         <span data-feather="shopping-cart" className="align-text-bottom"></span>
                                         My Blog Posts
                                     </a>
                                 </li>
+                                </div>
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Create A New Post">
                                         <span data-feather="users" className="align-text-bottom"></span>
                                         Create A New Post
                                     </a>
                                 </li>
-                                {UserRole === 'Admin' ? <><li className="nav-item">
+                                </div>
+                                {UserRole === 'Admin' ? <>
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/All Posts">
                                         <span data-feather="bar-chart-2" className="align-text-bottom"></span>
                                         All Other Posts
                                     </a>
-                                </li></> : null}
-
+                                </li></div></> : null}
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/My Deleted Posts">
                                         <span data-feather="layers" className="align-text-bottom"></span>
                                         My Deleted Posts
                                     </a>
                                 </li>
-                                {UserRole==='Admin'?<><li className="nav-item">
+                                </div>
+                                {UserRole === 'Admin' ? <>
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Add New Category">
                                         <span data-feather="layers" className="align-text-bottom"></span>
                                         Add New Category
                                     </a>
-                                </li></> : null}
+                                </li></div></> : null}
+                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/profile">
                                         <span data-feather="layers" className="align-text-bottom"></span>
-                                        Profile Details
+                                        Profile Settings
                                     </a>
                                 </li>
+                                </div>
                             </ul>
                         </div>
                     </nav>
@@ -94,10 +109,10 @@ const DashHome = () => {
                     {pageName === 'Pending Approvals' ? <PendingApprovals /> : null}
                     {pageName === 'Create A New Post' ? <CreatePost /> : null}
                     {pageName === 'My Deleted Posts' ? <MyDeletedPosts /> : null}
-                    {pageName === 'All Posts' && UserRole==='Admin' ? <AllPosts /> : null}
-                    {pageName === 'Add New Category' && UserRole==='Admin'? <AddNewCategory /> : null}
-                    {pageName === 'EditCategory' && UserRole==='Admin'? <EditCategory /> : null}
-                    {pageName === 'EditPosts'? <EditPosts /> : null}
+                    {pageName === 'All Posts' && UserRole === 'Admin' ? <AllPosts /> : null}
+                    {pageName === 'Add New Category' && UserRole === 'Admin' ? <AddNewCategory /> : null}
+                    {pageName === 'EditCategory' ? <EditCategory /> : null}
+                    {pageName === 'EditPosts' ? <EditPosts /> : null}
                 </div>
             </div></>
 
