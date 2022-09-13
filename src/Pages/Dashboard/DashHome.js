@@ -35,7 +35,7 @@ const DashHome = () => {
                     <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style={{ position: "relative" }}>
                         <div className="position-sticky pt-3 sidebar-sticky">
                             <ul className="nav flex-column">
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                     <li className="nav-item">
                                         <a className={"nav-link"} aria-current="page" href="/dashboard/My Dashboard">
                                             <span data-feather="home" className="align-text-bottom"></span>
@@ -43,7 +43,7 @@ const DashHome = () => {
                                         </a>
                                     </li>
                                 </div>
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Pending Approvals">
                                         <span data-feather="file" className="align-text-bottom"></span>
@@ -51,7 +51,7 @@ const DashHome = () => {
                                     </a>
                                 </li>
                                 </div>
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/My Blog Posts">
                                         <span data-feather="shopping-cart" className="align-text-bottom"></span>
@@ -59,7 +59,7 @@ const DashHome = () => {
                                     </a>
                                 </li>
                                 </div>
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Create A New Post">
                                         <span data-feather="users" className="align-text-bottom"></span>
@@ -68,14 +68,14 @@ const DashHome = () => {
                                 </li>
                                 </div>
                                 {UserRole === 'Admin' ? <>
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/All Posts">
                                         <span data-feather="bar-chart-2" className="align-text-bottom"></span>
                                         All Other Posts
                                     </a>
                                 </li></div></> : null}
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/My Deleted Posts">
                                         <span data-feather="layers" className="align-text-bottom"></span>
@@ -84,14 +84,14 @@ const DashHome = () => {
                                 </li>
                                 </div>
                                 {UserRole === 'Admin' ? <>
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/Add New Category">
                                         <span data-feather="layers" className="align-text-bottom"></span>
                                         Add New Category
                                     </a>
                                 </li></div></> : null}
-                                <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
+                                <div className="d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-left border-bottom">
                                 <li className="nav-item">
                                     <a className="nav-link" href="/dashboard/profile">
                                         <span data-feather="layers" className="align-text-bottom"></span>

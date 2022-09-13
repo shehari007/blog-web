@@ -54,13 +54,15 @@ const Login = () => {
             secureLocalStorage.setItem('setAuthentication', encryptedTokenAdmin);
             var encryptedRoleAdmin = CryptoJS.AES.encrypt('Admin', 'Secret Pharase').toString();
             secureLocalStorage.setItem('setRole', encryptedRoleAdmin);
-            history('/home')
+            history('/home');
+            window.location.reload();
           }else if (tokenStatus === 'User') {
             var encryptedTokenUser = CryptoJS.AES.encrypt(tokenStatus, 'Secret Pharase').toString();
             secureLocalStorage.setItem('setAuthentication', encryptedTokenUser);
             var encryptedRoleUser = CryptoJS.AES.encrypt('User', 'Secret Pharase').toString();
             secureLocalStorage.setItem('setRole', encryptedRoleUser);
-            history('/home')
+            history('/home');
+            window.location.reload();
           }
         }
       })

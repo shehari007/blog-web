@@ -200,8 +200,8 @@ const PendingApprovals = () => {
 
 
   return (
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         {UserRole === 'Admin' ? <h2>Pending Blog Approvals</h2> : <h2>My Blogs Pending Approvals</h2>}
       </div>
       <div className="row g-5">
@@ -209,8 +209,8 @@ const PendingApprovals = () => {
           {infoStatus === '0 results[]' ? <><h4>No Pending Blog Posts Found!</h4></>
             :
             <>
-              <div class="table-responsive">
-                <table class="table table-striped table-sm">
+              <div className="table-responsive">
+                <table className="table table-striped table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -230,7 +230,7 @@ const PendingApprovals = () => {
                           <td index={index}>{index + 1}</td>
                           <td>{data.name}</td>
                           <td >{data.title}</td>
-                          <td><span class="d-inline-block text-truncate" style={{ maxWidth: '150px' }}>{data.post}</span></td>
+                          <td><span className="d-inline-block text-truncate" style={{ maxWidth: '150px' }}>{data.post}</span></td>
                           <td>{data.category}</td>
                           <td>{data.status}</td>
                           <td>{UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
@@ -251,7 +251,7 @@ const PendingApprovals = () => {
       </div>
       <br />
       <br />
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         {UserRole === 'Admin' ? <h2>Pending Category Approvals</h2> : <h2>My Category Pending Approvals</h2>}
       </div>
       <div className="row g-5">
@@ -259,8 +259,8 @@ const PendingApprovals = () => {
           {UserCatStatus === '0 cat[]' ? <><h4>No Pending Category Found!</h4></>
             :
             <>
-              <div class="table-responsive">
-                <table class="table table-striped table-sm">
+              <div className="table-responsive">
+                <table className="table table-striped table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
