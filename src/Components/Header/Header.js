@@ -18,11 +18,13 @@ const Header = () => {
 
 
   let history = useNavigate();
+  const [dosyaname, setdosyaname] = useState([]);
 
   const handleLogout = () => {
 
     secureLocalStorage.clear();
     history('/login');
+    window.location.reload();
   }
   const [menuData, setMenuData] = useState([]);
   useEffect(() => {
@@ -33,6 +35,21 @@ const Header = () => {
     menuData();
   }, []);
 
+  useEffect(() => {
+    console.log(`http://localhost/img.php`)
+    const getDetails = async () => {
+      const res = await axios(`http://localhost/img.php?name=${username}`);
+      console.log(res.data);
+      setdosyaname(res.data);
+    };
+    getDetails();
+  }, []);
+
+  var pic = ''
+  {dosyaname !== '0 results[]' ? dosyaname.map((data) => {
+    pic = "/" + data.filename
+
+  }) : pic = "/default.jpg"}
 
   return (
     <><header>
@@ -42,7 +59,9 @@ const Header = () => {
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
             {role === 'Admin' ?
-              <><a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome back {username}!</a>
+              <>
+               <img src={pic} className="img-thumbnail" alt="..." style={{ width: '50px', height: '50px', borderRadius: '75%' }}></img>
+              <a href="/dashboard/profile" style={{marginLeft: '1%'}} className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome back {username}!</a>
                 <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                   <li>
                     <a href="/home" className="nav-link text-white">
@@ -75,7 +94,9 @@ const Header = () => {
                   </li>
                 </ul></>
               : role === 'User' ?
-                <><a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome back {username}!</a>
+                <>
+                <img src={pic} className="img-thumbnail" alt="..." style={{ width: '50px', height: '50px', borderRadius: '75%' }}></img>
+                <a href="/dashboard/profile" style={{marginLeft: '1%'}} className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome back {username}!</a>
                   <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                     <li>
                       <a href="/home" className="nav-link text-white">
@@ -108,7 +129,9 @@ const Header = () => {
                     </li>
                   </ul></>
                 :
-                <><a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome to My BLOG</a>
+                <>
+                <img src="/default.jpg" className="img-thumbnail" alt="..." style={{ width: '50px', height: '50px', borderRadius: '75%' }}></img>
+                <a href="/"  style={{marginLeft: '1%'}} className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome to My BLOG</a>
                   <div className="text-end">
 
                     <a href="/login" style={{ textDecoration: "none", color: "white" }}><button type="button" className="btn btn-success text-white me-2">Login</button></a>

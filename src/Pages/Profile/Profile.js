@@ -6,6 +6,7 @@ import CryptoJS from 'crypto-js';
 import { useNavigate } from 'react-router';
 
 const Profile = () => {
+  
   let history = useNavigate();
   const role = secureLocalStorage.getItem('setRole')
   const Username = secureLocalStorage.getItem('UserDetail')
@@ -16,6 +17,7 @@ const Profile = () => {
     var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
     var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
   }
+  console.log(UserRole)
 
   const [dosyaname, setdosyaname] = useState([]);
   const [postCount, setMyPostCount] = useState([]);
@@ -93,6 +95,7 @@ const Profile = () => {
           console.log(JSON.stringify(response.data));
           if (response.data === true) {
             alert('Password Updated successfully')
+            window.location.reload();
           } else if (response.data !== true) {
             alert('Something went wrong')
           }
@@ -161,6 +164,7 @@ const Profile = () => {
           console.log(JSON.stringify(response.data));
           if (response.data === true) {
             alert('Email Updated successfully')
+            window.location.reload();
           } else if (response.data !== true) {
             alert('Something went wrong')
           }
@@ -180,25 +184,26 @@ const Profile = () => {
       })
   }
 
-  const onDeleteUserData = (name) => {
+  const onDeleteUserData = (name,role) => {
     console.log(name);
+    console.log(role);
     const FormData = require('form-data');
     let data = new FormData();
     data.append('action', 'delete');
     data.append('name', name);
-    data.append('user',UserRole);
+    data.append('user', role);
 
     let config = {
 
         method: 'post',
         url: 'http://localhost/DELETEACCOUNT.php',
-        headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
-        ,
-        data: data
+        withCredentials: false,
+      data: data
     };
 
     axios(config).then(function (response) {
         console.log(JSON.stringify(response.data));
+        
     })
         .catch(function (error) {
             console.log(error);
@@ -206,6 +211,37 @@ const Profile = () => {
             // alert('Category Deleted Successfully')
             // window.location.reload();
         })
+}
+
+
+const promoteAdmin = (id,name) => {
+  
+  const FormData = require('form-data');
+  let data = new FormData();
+  data.append('action', 'promote');
+  data.append('id', id );
+  data.append('role', 'Admin' );
+  data.append('name', name);
+
+  let config = {
+
+      method: 'post',
+      url: 'http://localhost/promoteadmin.php',
+      withCredentials: false,
+      data: data
+  };
+
+  axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+      alert(name + 'Promoted successfully')
+      window.location.reload();
+      
+  })
+      .catch(function (error) {
+          console.log(error);
+      }).then(() => {
+          
+      })
 }
 
   const DELETEACCOUNT = () => {
@@ -244,41 +280,44 @@ const Profile = () => {
   useEffect(() => {
     console.log(`http://localhost/img.php`)
     const getDetails = async () => {
-      const res = await axios(`http://localhost/img.php`);
+      const res = await axios(`http://localhost/img.php?name=${username}`);
       console.log(res.data);
       setdosyaname(res.data);
     };
     getDetails();
   }, []);
-  var pic = ''
 
+
+  var pic = ''
+  {dosyaname !== '0 results[]' ? dosyaname.map((data) => {
+    pic = "/" + data.filename
+
+  }) : pic = "/default.jpg"}
   return (
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Profile Settings</h1>
+    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 className="h2">Profile Settings</h1>
       </div>
-      <div class="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        {dosyaname !== '0 results[]' ? dosyaname.map((data) => {
-          pic = "/" + data.filename
-
-        }) : pic = "/default.jpg"}
+      <div className="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        
         <label>
-          <img src={pic} class="img-thumbnail" alt="..." style={{ width: '150px', height: '150px', borderRadius: '75%' }}></img>
+          <img src={pic} className="img-thumbnail" alt="..." style={{ width: '150px', height: '150px', borderRadius: '75%' }}></img>
           <Upload />
         </label>
 
         <ul>
+          <li>Username: {username}</li>
           <li>My Total Posts: {postCount}</li>
           <li>Total Likes: 0</li>
           <li>Access Mode: {UserRole}</li>
         </ul>
 
       </div>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Security Settings</h1>
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 className="h2">Security Settings</h1>
       </div>
-      <div class="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div className="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-5 mb-6 border-bottom">
         <div style={{ maxWidth: '30%' }}>
           <h4>Change Password</h4>
           <div className="form-floating">
@@ -293,7 +332,7 @@ const Profile = () => {
           <br />
           <button type="submit" className='btn btn-primary' onClick={CurrentPass}>Change Password</button>
         </div>
-        <div style={{ maxWidth: '30%', marginLeft: '10%' }}>
+        <div style={{ maxWidth: '50%', marginLeft: '10%' }}>
           <h4>Change Email Address</h4>
           <div className="form-floating">
             <input type="email" className="form-control" id="floatingEmail" name="email" placeholder="email" />
@@ -308,8 +347,8 @@ const Profile = () => {
           <button type="submit" className='btn btn-primary' onClick={CurrentEmail}>Change Email</button>
         </div>
         {UserRole !== 'Admin' ? <>
-          <div style={{ maxWidth: '30%', marginLeft: '10%' }}>
-            <h4>DELETE PROFILE</h4>
+          <div style={{ maxWidth: '50%', marginLeft: '10%' }}>
+            <h4>Delete Account</h4>
             <div className="form-floating">
               <input type="email" className="form-control" id="deleteemail" name="email" placeholder="email" />
               <label htmlFor="deletemail">Enter Current Email</label>
@@ -323,17 +362,17 @@ const Profile = () => {
             <button type="submit" className='btn btn-danger' onClick={DELETEACCOUNT}>Delete Account</button>
 
           </div>
-          <div style={{ maxWidth: '30%', marginLeft: '10%' }}>
-            <p style={{ fontStyle: 'italic' }}>*warning! if you delete your profile, all posts, categories, access will be deleted<br />and it cannot be undone
-              Please make sure before deleting!*<br /></p>
+          <div style={{ maxWidth: '50%', marginLeft: '10%' }}>
+            <p style={{ fontStyle: 'italic' }}>*warning! if you delete your profile,<br/> all posts, categories, access will be deleted<br />and it cannot be undone
+              <br/>Please make sure before deleting!*<br /></p>
           </div></> : null}
       </div>
       <div>{UserRole === 'Admin' ? <>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h4>User DATA</h4>
       </div>
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered table-sm">
+          <div className="table-responsive">
+            <table className="table table-striped table-bordered table-sm">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -351,8 +390,8 @@ const Profile = () => {
                   <td>{data.name}</td>
                   <td>{data.email}</td>
                   <td>{data.role}</td>
-                  <td><button className='btn btn-danger'onClick={() => onDeleteUserData(data.name)}>Delete</button>
-                  <button className='btn btn-success'>Promote to Admin</button></td>
+                  <td><button className='btn btn-danger'onClick={() => onDeleteUserData(data.name, data.role)}>Delete</button>
+                  <button className='btn btn-success'onClick={() => promoteAdmin(data.id,data.name)}>Promote to Admin</button></td>
                   </tr>
                   </>
                 })}

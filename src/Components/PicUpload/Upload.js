@@ -31,6 +31,7 @@ export default class Upload extends React.Component {
         let data = new FormData();
         data.append('action', 'approve');
         data.append('image', this.state.selectedFile, this.state.selectedFile.name);
+        data.append('name', username);
         let config = {
 
             method: 'post',
@@ -46,7 +47,7 @@ export default class Upload extends React.Component {
                 console.log(error);
             }).then(() => {
                 alert('photo uploaded successfully')
-                //window.location.reload();
+                window.location.reload();
             })
     }
 
@@ -67,7 +68,7 @@ export default class Upload extends React.Component {
         return (
             <div style={{justifyContent: 'center'}}>
                 <input type="file" onChange={this.fileSelect} style={{display: 'none'}} />
-                <button className="btn btn-primary"onClick={this.fileUpload} alignSelf="center">Upload</button>
+                <button className="btn btn-primary"onClick={this.fileUpload}>Upload</button>
             </div>
         );
     }
