@@ -97,6 +97,7 @@ const AllPosts = () => {
     secureLocalStorage.setItem('category', category);
     secureLocalStorage.setItem('user', user);
     secureLocalStorage.setItem('status', status);
+    secureLocalStorage.setItem('route', 'All Posts');
 }
 
   return (
@@ -112,7 +113,7 @@ const AllPosts = () => {
 
 
               <div class="table-responsive">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-bordered table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -137,10 +138,11 @@ const AllPosts = () => {
                           <td>{data.status}</td>
                           <td>{data.category}</td>
                           <td style={{ maxWidth: '20%' }}>{data.user}</td>
-                          <td>{UserRole === 'Admin' && data.status === 'Pending Approval' ? <><button className="btn btn-primary">Edit</button>
+                          <td>{UserRole === 'Admin' && data.status === 'Pending Approval' ? <>
+                          <a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                             <button className="btn btn-danger" onClick={() => onDeleteAdmin(data.id)}>Permanently Delete</button>
                             <button className="btn btn-success" onClick={() => onApprove(data.id)}>Approve</button>
-                          </> : UserRole === 'Admin' ? <><button className="btn btn-primary">Edit</button>
+                          </> : UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
 
                             <button className="btn btn-danger" onClick={() => onDeleteAdmin(data.id)}>Permanently Delete</button>
                           </> : null}</td>

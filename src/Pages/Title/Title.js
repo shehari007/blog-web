@@ -17,19 +17,20 @@ const Title = () => {
         };
         getUsers();
     }, []);
-
+    
     return (
         <div className="container" style={{ marginTop: '2%' }}>
             <div className="row g-5">
                 <div className="col-md-8">
                     {info.map((data) => {
+                        var link = "/userposts/"+ data.name
                         return <>
                             <h3 className="pb-4 mb-4 fst-italic border-bottom">
                                 From the {data.category}!
                             </h3>
                             <article className="blog-post">
                                 <h2 className="blog-post-title mb-1">{data.title}</h2>
-                                <p className="blog-post-meta">January 1, 2021 by <a href="localhost:3000">{data.name}</a></p>
+                                <p className="blog-post-meta">January 1, 2021 by <a href={link}>{data.name}</a></p>
                                 <p style={{ whiteSpace: 'pre-line' }}>{parse(data.post)}</p>
                             </article>
                         </>

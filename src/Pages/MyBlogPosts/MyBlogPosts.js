@@ -111,7 +111,7 @@ const MyBlogPosts = () => {
               :
               <>
                 <div class="table-responsive">
-                  <table class="table table-striped table-sm">
+                  <table class="table table-striped table-bordered table-sm">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -135,7 +135,7 @@ const MyBlogPosts = () => {
                             <td>{UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                               <button className="btn btn-danger"onClick={() => onDelete(data.id)}>Delete</button>
                               </> : 
-                              <><button className="btn btn-primary">Edit</button>
+                              <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                                 <button className="btn btn-danger" onClick={() => onDelete(data.id)}>Delete</button></>}</td>
                           </tr>
                         </>

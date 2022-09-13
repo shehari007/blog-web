@@ -3,8 +3,20 @@ import { useEffect, useState } from 'react';
 import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
 const EditCategory = () => {
+
+    const role = secureLocalStorage.getItem('setRole')
+  const Username = secureLocalStorage.getItem('UserDetail')
+
+  if (role) {
+    var decryptedToken = CryptoJS.AES.decrypt(role, 'Secret Pharase');
+    var UserRole = decryptedToken.toString(CryptoJS.enc.Utf8);
+    var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
+    var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
+  }
+
     let history = useNavigate();
     const [id, setID] = useState('');
     const [category, setCategory] = useState('');
@@ -42,7 +54,9 @@ const EditCategory = () => {
             }).then(() => {
                 alert('Category successfully updated');
                 //window.location.reload();
-                history('/dashboard/Add New Category')
+                {UserRole==='Admin' && secureLocalStorage.getItem('route')==='Pending Approval'?
+                history('/dashboard/Pending Approvals'): UserRole==='Admin'?history('/dashboard/Add New Category'): history('/dashboard/Pending Approvals');}
+                secureLocalStorage.removeItem('route');
                 window.location.reload();
             })
     }
