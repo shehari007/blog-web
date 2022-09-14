@@ -4,9 +4,86 @@ import axios from 'axios';
 import secureLocalStorage from "react-secure-storage";
 import CryptoJS from 'crypto-js';
 import { useNavigate } from 'react-router';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Helmet } from 'react-helmet';
 
+
+function MyVerticallyCenteredModal(props) {
+
+  const [selected, setSelected] = useState('');
+
+  const handleChange = event => {
+    setSelected(event.target.value);
+  };
+
+  const AddUser = () => {
+
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'add');
+    data.append('name', document.getElementById('username').value);
+    data.append('email', document.getElementById('email').value);
+    data.append('password', document.getElementById('password').value);
+    data.append('role', selected);
+
+    let config = {
+
+      method: 'post',
+      url: 'http://localhost/newuser.php',
+      headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+      ,
+      data: data
+    }
+
+    axios(config).then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => {
+        alert('User Added Successfully');
+        window.location.reload();
+      })
+  }
+
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Enter User Details
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <label>Enter Username</label>
+        <input type="text" className="form-control" id="username" name="username" placeholder="Username" />
+        <label>Enter Email Address</label>
+        <input type="email" className="form-control" id="email" name="email" placeholder="Email Address" />
+        <label>Enter Password</label>
+        <input type="password" className="form-control" id="password" name="password" placeholder="Password" />
+        <label>Select Access Level</label>
+        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" value={selected} onChange={handleChange} required>
+          <option value="">Select Level</option>
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+        </select>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={AddUser}>Add</Button>
+        <Button onClick={props.onHide}>Cancel</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 const Profile = () => {
-  
+
+  const [modalShow, setModalShow] = React.useState(false);
   let history = useNavigate();
   const role = secureLocalStorage.getItem('setRole')
   const Username = secureLocalStorage.getItem('UserDetail')
@@ -184,7 +261,7 @@ const Profile = () => {
       })
   }
 
-  const onDeleteUserData = (name,role) => {
+  const onDeleteUserData = (name, role) => {
     console.log(name);
     console.log(role);
     const FormData = require('form-data');
@@ -195,54 +272,54 @@ const Profile = () => {
 
     let config = {
 
-        method: 'post',
-        url: 'http://localhost/DELETEACCOUNT.php',
-        withCredentials: false,
+      method: 'post',
+      url: 'http://localhost/DELETEACCOUNT.php',
+      withCredentials: false,
       data: data
     };
 
     axios(config).then(function (response) {
-        console.log(JSON.stringify(response.data));
-        
+      console.log(JSON.stringify(response.data));
+
     })
-        .catch(function (error) {
-            console.log(error);
-        }).then(() => {
-            // alert('Category Deleted Successfully')
-            // window.location.reload();
-        })
-}
+      .catch(function (error) {
+        console.log(error);
+      }).then(() => {
+        alert('User Deleted Successfully')
+        window.location.reload();
+      })
+  }
 
 
-const promoteAdmin = (id,name) => {
-  
-  const FormData = require('form-data');
-  let data = new FormData();
-  data.append('action', 'promote');
-  data.append('id', id );
-  data.append('role', 'Admin' );
-  data.append('name', name);
+  const promoteAdmin = (id, name) => {
 
-  let config = {
+    const FormData = require('form-data');
+    let data = new FormData();
+    data.append('action', 'promote');
+    data.append('id', id);
+    data.append('role', 'Admin');
+    data.append('name', name);
+
+    let config = {
 
       method: 'post',
       url: 'http://localhost/promoteadmin.php',
       withCredentials: false,
       data: data
-  };
+    };
 
-  axios(config).then(function (response) {
+    axios(config).then(function (response) {
       console.log(JSON.stringify(response.data));
       alert(name + 'Promoted successfully')
       window.location.reload();
-      
-  })
+
+    })
       .catch(function (error) {
-          console.log(error);
+        console.log(error);
       }).then(() => {
-          
+
       })
-}
+  }
 
   const DELETEACCOUNT = () => {
 
@@ -289,29 +366,39 @@ const promoteAdmin = (id,name) => {
 
 
   var pic = ''
-  {dosyaname !== '0 results[]' ? dosyaname.map((data) => {
-    pic = "/" + data.filename
+  {
+    dosyaname !== '0 results[]' ? dosyaname.map((data) => {
+      pic = "/" + data.filename
 
-  }) : pic = "/default.jpg"}
+    }) : pic = "/default.jpg"
+  }
   return (
 
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <Helmet>
+        <title>Profile Settings</title>
+      </Helmet>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Profile Settings</h1>
       </div>
       <div className="d-flex justify-content-left flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        
+
         <label>
           <img src={pic} className="img-thumbnail" alt="..." style={{ width: '150px', height: '150px', borderRadius: '75%' }}></img>
           <Upload />
         </label>
-
-        <ul>
-          <li>Username: {username}</li>
-          <li>My Total Posts: {postCount}</li>
-          <li>Total Likes: 0</li>
-          <li>Access Mode: {UserRole}</li>
-        </ul>
+        <ListGroup variant="flush" style={{ marginLeft: '2.5%' }}>
+          <ListGroup.Item>Username: {username}</ListGroup.Item>
+          <ListGroup.Item>My Total Posts: {postCount}</ListGroup.Item>
+          <ListGroup.Item>Total Likes: 0</ListGroup.Item>
+          <ListGroup.Item>Access Mode: {UserRole}</ListGroup.Item>
+        </ListGroup>
+        {/* <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul> */}
 
       </div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -363,42 +450,54 @@ const promoteAdmin = (id,name) => {
 
           </div>
           <div style={{ maxWidth: '50%', marginLeft: '10%' }}>
-            <p style={{ fontStyle: 'italic' }}>*warning! if you delete your profile,<br/> all posts, categories, access will be deleted<br />and it cannot be undone
-              <br/>Please make sure before deleting!*<br /></p>
+            <p style={{ fontStyle: 'italic' }}>*warning! if you delete your profile,<br /> all posts, categories, access will be deleted<br />and it cannot be undone
+              <br />Please make sure before deleting!*<br /></p>
           </div></> : null}
       </div>
       <div>{UserRole === 'Admin' ? <>
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h4>User DATA</h4>
-      </div>
-          <div className="table-responsive">
-            <table className="table table-striped table-bordered table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col" style={{ width: '20%' }}>Username</th>
-                  <th scope="col" style={{ width: '15%' }}>Email</th>
-                  <th scope="col">Access</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {userData.map((data, index) =>{
-                  return <>
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h4>User DATA</h4>
+          <Button variant="warning" onClick={() => setModalShow(true)}>
+            Add New User
+          </Button>
+
+          <MyVerticallyCenteredModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        </div>
+
+
+        <div className="table-responsive">
+          <table className="table table-striped table-bordered table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" style={{ width: '20%' }}>Username</th>
+                <th scope="col" style={{ width: '15%' }}>Email</th>
+                <th scope="col">Access</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userData.map((data, index) => {
+                return <>
                   <tr>
-                  <td index={index}>{index+1}</td>
-                  <td>{data.name}</td>
-                  <td>{data.email}</td>
-                  <td>{data.role}</td>
-                  <td><button className='btn btn-danger'onClick={() => onDeleteUserData(data.name, data.role)}>Delete</button>
-                  <button className='btn btn-success'onClick={() => promoteAdmin(data.id,data.name)}>Promote to Admin</button></td>
+                    <td index={index}>{index + 1}</td>
+                    <td>{data.name}</td>
+                    <td>{data.email}</td>
+                    <td>{data.role}</td>
+                    <td>
+                      {data.role !== 'Admin' ? <><button className='btn btn-danger' onClick={() => onDeleteUserData(data.name, data.role)}>Delete</button>
+                        <button className='btn btn-success' onClick={() => promoteAdmin(data.id, data.name)}>Promote to Admin</button></> : null}
+                    </td>
                   </tr>
-                  </>
-                })}
-              </tbody>
-            </table>
-          </div>
-        </> : null}</div>
+                </>
+              })}
+            </tbody>
+          </table>
+        </div>
+      </> : null}</div>
     </main>
   )
 }

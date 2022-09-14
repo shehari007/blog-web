@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import secureLocalStorage from "react-secure-storage";
-import CryptoJS from 'crypto-js'
+import CryptoJS from 'crypto-js';
+import { Helmet } from 'react-helmet';
+
 const AllPosts = () => {
 
   const role = secureLocalStorage.getItem('setRole')
@@ -102,6 +104,7 @@ const AllPosts = () => {
 
   return (
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <Helmet><title>All Blog Posts</title></Helmet>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2>All Blog Posts</h2>
       </div>

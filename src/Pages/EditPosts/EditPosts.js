@@ -6,6 +6,7 @@ import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
+import { Helmet } from 'react-helmet';
 
 const role = secureLocalStorage.getItem('setRole')
 const Username = secureLocalStorage.getItem('UserDetail')
@@ -143,6 +144,7 @@ const EditPosts = () => {
 
     return (
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <Helmet><title>Edit Blog Post Details</title></Helmet>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h2>Edit Blog Post
                 </h2>
