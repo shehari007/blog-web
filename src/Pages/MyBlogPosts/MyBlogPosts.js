@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import secureLocalStorage from "react-secure-storage";
 import CryptoJS from 'crypto-js'
+import { Helmet } from 'react-helmet';
+
 const MyBlogPosts = () => {
 
   const role = secureLocalStorage.getItem('setRole')
@@ -101,6 +103,7 @@ const MyBlogPosts = () => {
 
   return (
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <Helmet><title>My Blog Posts</title></Helmet>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h2>My Blog Posts</h2>
       <a href='/dashboard/Create A New Post'><button className='btn btn-success'>Create New</button></a>

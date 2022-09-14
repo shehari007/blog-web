@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import  secureLocalStorage  from  "react-secure-storage";
 import CryptoJS from 'crypto-js';
-
+import { Helmet } from 'react-helmet';
 const Login = () => {
 
   let history = useNavigate();
@@ -72,6 +72,7 @@ const Login = () => {
   }
   return (
     <main className="form-signin w-100 m-auto">
+      <Helmet><title>Login - MyBlog.com</title></Helmet>
       <form>
         <img className="mb-4" src={LOGO} alt="" width="175" height="150" align="center" />
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>

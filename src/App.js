@@ -12,6 +12,7 @@ import ProtectedRoute from './ProtectedRoute';
 import { Fragment } from 'react';
 import Userposts from './Pages/UserPosts/UserPosts'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   
   return (
@@ -30,10 +31,8 @@ function App() {
 
             <Route exact path='/dashboard/:Dashboard' element={<ProtectedRoute />}>
               <Route exact path='/dashboard/:Dashboard' element={<Dashboard />} />
-            </Route>
-
             
-
+            </Route>
           </Routes>
         </Fragment>
         <Footer />

@@ -3,6 +3,8 @@ import './Signup.css';
 import LOGO from '..//..//Assets/bootstrap-logo.svg'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet';
+
 const Signup = () => {
 
   let history = useNavigate();
@@ -50,6 +52,7 @@ const Signup = () => {
   }
   return (
     <main className="form-signin w-100 m-auto">
+      <Helmet><title>Sign-Up MyBlog.com</title></Helmet>
       <form>
         <img className="mb-4" src={LOGO} alt="" width="72" height="57" />
         <h1 className="h3 mb-3 fw-normal">Please sign up</h1>

@@ -3,6 +3,7 @@ import axios from 'axios'
 import secureLocalStorage from "react-secure-storage";
 import CryptoJS from 'crypto-js';
 import { useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 const PendingApprovals = () => {
   let history = useNavigate();
@@ -201,6 +202,7 @@ const PendingApprovals = () => {
 
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <>{UserRole==='Admin'?<Helmet><title>Pending Approvals</title></Helmet>:<Helmet><title>My Pending Approvals</title></Helmet>}</>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         {UserRole === 'Admin' ? <h2>Pending Blog Approvals</h2> : <h2>My Blogs Pending Approvals</h2>}
       </div>

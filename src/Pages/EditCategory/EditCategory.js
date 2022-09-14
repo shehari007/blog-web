@@ -4,6 +4,7 @@ import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
+import { Helmet } from 'react-helmet';
 
 const EditCategory = () => {
 
@@ -64,6 +65,7 @@ const EditCategory = () => {
 
     return (
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <Helmet><title>Edit Category Details</title></Helmet>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h2>Edit Category
                 </h2>

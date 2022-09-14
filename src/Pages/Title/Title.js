@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import parse from 'html-react-parser'
+import { Helmet } from 'react-helmet'
 
 const Title = () => {
 
@@ -20,6 +21,7 @@ const Title = () => {
     
     return (
         <div className="container" style={{ marginTop: '2%' }}>
+            <Helmet><title>{ItemId} - Blog Post</title></Helmet>
             <div className="row g-5">
                 <div className="col-md-8">
                     {info.map((data) => {

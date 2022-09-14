@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Banner from '..//..//Components/MainBanner/MainBanner'
 import parse from 'html-react-parser';
+import { Helmet } from 'react-helmet';
 
 const UserPosts = () => {
 
@@ -34,6 +35,7 @@ const UserPosts = () => {
   };
   return (
     <div className="container">
+      <Helmet><title>{UserName} - Blog Posts</title></Helmet>
       <Banner />
       <div className="row g-5">
         <div className="col-md-8">
