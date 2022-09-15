@@ -5,10 +5,10 @@ import Banner from '..//..//Components/MainBanner/MainBanner'
 import parse from 'html-react-parser'
 import { Helmet } from 'react-helmet'
 
-const Category = () => {
+const ArchivePosts = () => {
 
   const params = useParams()
-  const CategoryName = params.category
+  const ArchiveDate = params.archivedate
 
 
   const [info, setInfo] = useState([]);
@@ -18,7 +18,7 @@ const Category = () => {
   useEffect(() => {
 
     const getUsers = async () => {
-      const res = await axios(`http://localhost/allcat.php?kategori=${CategoryName}`);
+      const res = await axios(`http://localhost/allarchive.php?archive_time=${ArchiveDate}`);
       console.log(res.data);
       setInfo(res.data);
     };
@@ -47,13 +47,13 @@ const Category = () => {
   };
   return (
     <div className="container">
-      <Helmet><title>{CategoryName} - Blog Posts</title></Helmet>
+      <Helmet><title>Archives {ArchiveDate} - Blog Posts</title></Helmet>
       <Banner />
       <div className="row g-5">
         <div className="col-md-8">
 
           <h3 className="pb-4 mb-4 fst-italic border-bottom">
-            From the {CategoryName}
+            From the {ArchiveDate} Archives
           </h3>
           {info === '0 results[]' ? <h1>No Posts Found!</h1> : <>
             {info.map((data) => {
@@ -85,8 +85,11 @@ const Category = () => {
               <h4 className="fst-italic">Archives</h4>
               <ol className="list-unstyled mb-0">
               {archiveDate.map((data)=>{
+                var link = "/archiveposts/"+data.archive_time
+                console.log(link);
               return <>
-               <li><a href="localhost:3000">{data.archive_time}</a></li>
+              
+               <li><a href={link}>{data.archive_time}</a></li>
               </>
             })}
               </ol>
@@ -107,4 +110,4 @@ const Category = () => {
 }
 
 
-export default Category
+export default ArchivePosts

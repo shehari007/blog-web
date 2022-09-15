@@ -124,7 +124,7 @@ const AllPosts = () => {
                       <th scope="col" style={{ width: '20%' }}>Title</th>
                       <th scope="col" style={{ width: '15%' }}>Blog</th>
                       <th scope="col">Status</th>
-                      <th scope="col">Categpry</th>
+                      <th scope="col">Category</th>
                       <th scope="col" style={{ width: '5%' }}>Access</th>
                       <th scope="col">Actions</th>
                     </tr>

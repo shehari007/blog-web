@@ -110,7 +110,7 @@ const MyBlogPosts = () => {
       </div>
         <div className="row g-5">
           <div className="col-md-8" style={{ width: '100%' }}>
-            {infoStatus === '0 results[]' ? <><h1>No Posts Found!</h1><a href="/dashboard">Create a new post?</a></>
+            {infoStatus === '0 results[]' ? <><h4>No Posts Found!</h4><a href="/dashboard/Create A New Post/">Create a new post?</a></>
               :
               <>
                 <div class="table-responsive">

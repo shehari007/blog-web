@@ -6,6 +6,7 @@ import LoginPage from './Pages/Login/Login'
 import SignupPage from './Pages/Signup/Signup'
 import Category from './Pages/Category/Category';
 import BlogTitle from './Pages/Title/Title';
+import ArchivedPosts from './Pages/ArchivePosts/ArchivePosts';
 import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard/DashHome';
 import ProtectedRoute from './ProtectedRoute';
@@ -28,6 +29,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/userposts/:username" element={<Userposts />} />
+            <Route path="/archiveposts/:archivedate" element={<ArchivedPosts />} />
 
             <Route exact path='/dashboard/:Dashboard' element={<ProtectedRoute />}>
               <Route exact path='/dashboard/:Dashboard' element={<Dashboard />} />
