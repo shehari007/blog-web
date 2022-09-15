@@ -3,9 +3,9 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer className="blog-footer">
-      <p>MY BLOG built using Bootstrap by SYB 2022.</p>
+      <p>MyBlog.com Internship Project by Muhammad Sheharyar Butt 2022.</p>
       <p>
-        <a href="localhost:3000">Back to top</a>
+        <a href="/home">Go to Home</a>
       </p>
     </footer>
   )

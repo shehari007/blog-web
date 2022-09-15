@@ -5,7 +5,8 @@ import parse from 'html-react-parser'
 const MainModule = () => {
 
   const [info, setInfo] = useState([]);
-  console.log(info);
+  const [archiveDate, setarchiveDate] = useState([]);
+  
 
   useEffect(() => {
 
@@ -13,6 +14,17 @@ const MainModule = () => {
       const res = await axios(`http://localhost/homepage.php`);
       console.log(res.data);
       setInfo(res.data);
+    };
+
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    
+    const getUsers = async () => {
+      const res = await axios(`http://localhost/archivepanel.php`);
+      console.log(res.data);
+      setarchiveDate(res.data);
     };
 
     getUsers();
@@ -40,7 +52,7 @@ const MainModule = () => {
               return <>
                 <article className="blog-post">
                   <h2 className="blog-post-title mb-1">{data.title}</h2>
-                  <p className="blog-post-meta">January 1, 2021 by <a href={profilePosts}>{data.name}</a></p>
+                  <p className="blog-post-meta">{data.post_time} by <a href={profilePosts}>{data.name}</a></p>
                   <p style={textStyle}>{parse(data.post)}</p>
                   <a href={link} >Continue reading</a> </article>
               </>
@@ -63,18 +75,14 @@ const MainModule = () => {
         <div className="p-4">
           <h4 className="fst-italic">Archives</h4>
           <ol className="list-unstyled mb-0">
-            <li><a href="localhost:3000">March 2021</a></li>
-            <li><a href="localhost:3000">February 2021</a></li>
-            <li><a href="localhost:3000">January 2021</a></li>
-            <li><a href="localhost:3000">December 2020</a></li>
-            <li><a href="localhost:3000">November 2020</a></li>
-            <li><a href="localhost:3000">October 2020</a></li>
-            <li><a href="localhost:3000">September 2020</a></li>
-            <li><a href="localhost:3000">August 2020</a></li>
-            <li><a href="localhost:3000">July 2020</a></li>
-            <li><a href="localhost:3000">June 2020</a></li>
-            <li><a href="localhost:3000">May 2020</a></li>
-            <li><a href="localhost:3000">April 2020</a></li>
+          {archiveDate.map((data)=>{
+                var link = "/archiveposts/"+data.archive_time
+                console.log(link);
+              return <>
+              
+               <li><a href={link}>{data.archive_time}</a></li>
+              </>
+            })}
           </ol>
         </div>
 

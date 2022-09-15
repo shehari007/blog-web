@@ -35,6 +35,9 @@ const CreatePost = () => {
         setSelected(event.target.value);
     };
 
+    var dp = new Date().toLocaleString('en-us',{month:'long',day: 'numeric', year:'numeric'});
+   var ard=new Date().toLocaleString('en-us',{month:'long', year:'numeric'});
+   
     const postData = () => {
 
         var title = document.getElementById('blogtitle').value;
@@ -47,7 +50,9 @@ const CreatePost = () => {
         data.append('category', selected);
         data.append('user', UserRole);
         data.append('name', username);
-        data.append('status', status)
+        data.append('status', status);
+        data.append('mainDate', dp);
+        data.append('archiveDate', ard);
         
         let config = {
 
