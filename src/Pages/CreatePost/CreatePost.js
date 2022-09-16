@@ -167,6 +167,7 @@ const CreatePost = () => {
                 <h2>Write A New Blog</h2>
             </div>
             <div style={{ width: '100%' }}>
+                <form onSubmit={postData}>
                 <label htmlFor="blogtitle" class="form-label">Blog Title</label>
                 <input type="text" class="form-control" id="blogtitle" required/>
                 <br />
@@ -195,10 +196,12 @@ const CreatePost = () => {
                         value={convertedText}
                         onChange={setConvertedText}
                         style={{ minHeight: '300px' }}
+                        
                     />
                 </div>
                 <br />
-                <button type='submit' class="btn btn-success" onClick={postData}>Create Post</button>
+                <button type='submit' class="btn btn-success">Create Post</button>
+                </form>
             </div>
         </main>
     )
