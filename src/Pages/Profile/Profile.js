@@ -60,13 +60,15 @@ function MyVerticallyCenteredModal(props) {
           Enter User Details
         </Modal.Title>
       </Modal.Header>
+      <form onSubmit={AddUser}>
       <Modal.Body>
+        
         <label>Enter Username</label>
-        <input type="text" className="form-control" id="username" name="username" placeholder="Username" />
+        <input type="text" className="form-control" id="username" name="username" placeholder="Username" required/>
         <label>Enter Email Address</label>
-        <input type="email" className="form-control" id="email" name="email" placeholder="Email Address" />
+        <input type="email" className="form-control" id="email" name="email" placeholder="Email Address" required/>
         <label>Enter Password</label>
-        <input type="password" className="form-control" id="password" name="password" placeholder="Password" />
+        <input type="password" className="form-control" id="password" name="password" placeholder="Password" required/>
         <label>Select Access Level</label>
         <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" value={selected} onChange={handleChange} required>
           <option value="">Select Level</option>
@@ -75,9 +77,11 @@ function MyVerticallyCenteredModal(props) {
         </select>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={AddUser}>Add</Button>
+        <Button type = "submit">Add</Button>
         <Button onClick={props.onHide}>Cancel</Button>
+        
       </Modal.Footer>
+      </form>
     </Modal>
   );
 }

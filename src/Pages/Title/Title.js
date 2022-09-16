@@ -24,20 +24,20 @@ const Title = () => {
     const [emaildata, setemailData] = useState([]);
     const [commentCount, setcommentCount] = useState([]);
     const [archiveDate, setarchiveDate] = useState([]);
-    
-    useEffect(() => {
-    
-        const getUsers = async () => {
-          const res = await axios(`http://localhost/archivepanel.php`);
-          console.log(res.data);
-          setarchiveDate(res.data);
-        };
-    
-        getUsers();
-      }, []);
 
     useEffect(() => {
-        
+
+        const getUsers = async () => {
+            const res = await axios(`http://localhost/archivepanel.php`);
+            console.log(res.data);
+            setarchiveDate(res.data);
+        };
+
+        getUsers();
+    }, []);
+
+    useEffect(() => {
+
         const getDetails = async () => {
             const res = await axios(`http://localhost/commentcount.php?title=${TitleName}`);
             console.log(res.data);
@@ -47,7 +47,7 @@ const Title = () => {
     }, []);
 
     useEffect(() => {
-        
+
         const getDetails = async () => {
             const res = await axios(`http://localhost/userdata.php?username=${username}`);
             console.log(res.data);
@@ -86,16 +86,16 @@ const Title = () => {
 
     }, []);
 
-    var ct = new Date().toLocaleString('en-us',{ year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+    var ct = new Date().toLocaleString('en-us', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 
     const UploadComment = () => {
-        
-        var personRole=''
-        {UserRole==='Admin'? personRole = 'Admin': UserRole==='User'? personRole = 'User': personRole = 'Visitor'}
+
+        var personRole = ''
+        { UserRole === 'Admin' ? personRole = 'Admin' : UserRole === 'User' ? personRole = 'User' : personRole = 'Visitor' }
         var cm_name = ''
-        {username? cm_name = username: cm_name = document.getElementById('visitname').value}
-        var emailData= ''
-        {username? emaildata.map((data) => {return emailData=data.email}): emailData = document.getElementById('visitemail').value}
+        { username ? cm_name = username : cm_name = document.getElementById('visitname').value }
+        var emailData = ''
+        { username ? emaildata.map((data) => { return emailData = data.email }) : emailData = document.getElementById('visitemail').value }
         var comment = document.getElementById('visitcm').value;
         const FormData = require('form-data');
         let data = new FormData();
@@ -107,31 +107,33 @@ const Title = () => {
         data.append('role', personRole);
         data.append('post', comment);
         data.append('timestamp', ct);
-    
+
         let config = {
-    
-          method: 'post',
-          baseURL: 'http://localhost/uploadcomment.php',
-          withCredentials: false,
-          data: data
+
+            method: 'post',
+            baseURL: 'http://localhost/uploadcomment.php',
+            withCredentials: false,
+            data: data
         };
-    
+
         axios(config).then(function (response) {
-          console.log(JSON.stringify(response.data));
-          window.location.reload();
+            console.log(JSON.stringify(response.data));
+            window.location.reload();
         }).catch(function (error) {
-          console.log(error);
+            console.log(error);
         }).then(() => {
         })
-      }
-      var profilelink = ''
-      {UserRole ? pictureName.map((data) => {
-                                            
-        profilelink = "/" + data.filename
-    }) : profilelink="/default.jpg"}
+    }
+    var profilelink = ''
+    {
+        UserRole ? pictureName.map((data) => {
 
-   
-   console.log(ct);
+            profilelink = "/" + data.filename
+        }) : profilelink = "/default.jpg"
+    }
+
+
+    console.log(ct);
     return (
 
         <div className="container" style={{ marginTop: '2%' }}>
@@ -158,40 +160,40 @@ const Title = () => {
                                         <div className="p-3">
                                             <h4>Comments ({commentCount}) </h4>
                                         </div>
-                                        
+
 
                                         {UserRole ? <div className="mt-3 d-flex flex-row align-items-center p-3 form-color"> <img src={profilelink} width="50" className="rounded-circle mr-2" style={{ marginRight: '2%' }} />
-                                           <form onSubmit={UploadComment} style={{width: '100%', height: '5%'}}><input type="text" className="form-control"id="visitcm" placeholder="Enter your comment..." required /></form>
+                                            <form onSubmit={UploadComment} style={{ width: '100%', height: '5%' }}><input type="text" className="form-control" id="visitcm" placeholder="Enter your comment..." required /></form>
                                         </div> : <div className="mt-3 d-flex flex-row align-items-center p-3 form-color">
                                             <img src="/default.jpg" width="50" className="rounded-circle mr-2" style={{ marginRight: '2%' }} />
                                             <form onSubmit={UploadComment} className="d-flex flex-row align-items-center">
-                                            <input type="email" className="form-control" id="visitemail" placeholder="Enter your email..." required/>
-                                            <input type="text" className="form-control" id="visitname" placeholder="Enter your name..." required/>
-                                            <textarea type="text" className="form-control" id="visitcm" placeholder="Enter your comment..." required />
-                                            <button type="submit" className="btn btn-primary">Add</button></form>
+                                                <input type="email" className="form-control" id="visitemail" placeholder="Enter your email..." required />
+                                                <input type="text" className="form-control" id="visitname" placeholder="Enter your name..." required />
+                                                <textarea type="text" className="form-control" id="visitcm" placeholder="Enter your comment..." required />
+                                                <button type="submit" className="btn btn-primary">Add</button></form>
                                         </div>}
-                                        
+
 
                                         <div className="mt-2">
-                                            {comments!=='0 results[]'?
-                                            comments.map((data) => {
+                                            {comments !== '0 results[]' ?
+                                                comments.map((data) => {
 
-                                                var piclink = data.cm_picture
+                                                    var piclink = data.cm_picture
 
-                                                return <>
-                                                    <div className="d-flex flex-row p-3">
-                                                        <img src={piclink} style={{ marginRight: '2%' }} width="40" height="40" className="rounded-circle mr-3" />
-                                                        <div className="w-100">
-                                                            <div className="d-flex justify-content-between align-items-center">
-                                                                <div className="d-flex flex-row align-items-center"> <h5 className="mr-2">{data.cm_name}</h5>
+                                                    return <>
+                                                        <div className="d-flex flex-row p-3">
+                                                            <img src={piclink} style={{ marginRight: '2%' }} width="40" height="40" className="rounded-circle mr-3" />
+                                                            <div className="w-100">
+                                                                <div className="d-flex justify-content-between align-items-center">
+                                                                    <div className="d-flex flex-row align-items-center"> <h5 className="mr-2">{data.cm_name}</h5>
+                                                                    </div>
+                                                                    <small>{data.cm_time}</small>
                                                                 </div>
-                                                                <small>{data.cm_time}</small>
+                                                                <p className="text-justify comment-text mb-0 border-bottom">{data.cm_post}</p>
                                                             </div>
-                                                            <p className="text-justify comment-text mb-0 border-bottom">{data.cm_post}</p>
                                                         </div>
-                                                    </div>
-                                                </>
-                                            }) : null}
+                                                    </>
+                                                }) : null}
                                         </div>
                                     </div>
                                 </div>
@@ -216,11 +218,14 @@ const Title = () => {
                         <div className="p-4">
                             <h4 className="fst-italic">Archives</h4>
                             <ol className="list-unstyled mb-0">
-                            {archiveDate.map((data)=>{
-              return <>
-               <li><a href="localhost:3000">{data.archive_time}</a></li>
-              </>
-            })}
+                                {archiveDate.map((data) => {
+                                    var link = "/archiveposts/" + data.archive_time
+                                    console.log(link);
+                                    return <>
+
+                                        <li><a href={link}>{data.archive_time}</a></li>
+                                    </>
+                                })}
                             </ol>
                         </div>
                         <div className="p-4">

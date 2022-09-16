@@ -73,21 +73,21 @@ const Login = () => {
   return (
     <main className="form-signin w-100 m-auto">
       <Helmet><title>Login - MyBlog.com</title></Helmet>
-      <form>
+      <form onSubmit={SubmitForm}>
         <img className="mb-4" src={LOGO} alt="" width="175" height="150" align="center" />
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div className="form-floating">
-          <input type="email" className="form-control" id="floatingInput" name="email" placeholder="name@example.com" onChange={onChangeInput} />
+          <input type="email" className="form-control" id="floatingInput" name="email" placeholder="name@example.com" onChange={onChangeInput} required />
           <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
-          <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" onChange={onChangeInput} />
+          <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" onChange={onChangeInput} required />
           <label htmlFor="floatingPassword">Password</label>
         </div>
 
 
-        <button className="w-100 btn btn-lg btn-primary" type="button" onClick={SubmitForm}>Sign in</button>
+        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         <a href='/signup'>Don't Have an account? Create a new account here..</a>
         <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
       </form>

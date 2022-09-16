@@ -122,10 +122,12 @@ const NewCategory = () => {
                 </h2>
             </div>
             <div style={{ width: '100%' }}>
+                <form onSubmit={postData}>
                 <label htmlFor="nameofcategory" class="form-label">Write Name of Category</label>
                 <input type="text" class="form-control" id="nameofcategory" required/>
                 <br />
-                <button type='submit' class="btn btn-warning" onClick={postData}>Add Category</button>
+                <button type='submit' class="btn btn-warning">Add Category</button>
+                </form>
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h2>Category DATA

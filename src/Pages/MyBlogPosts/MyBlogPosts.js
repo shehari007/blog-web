@@ -122,6 +122,7 @@ const MyBlogPosts = () => {
                         <th scope="col" style={{ width: '15%' }}>Blog</th>
                         <th scope="col">Status</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Post Time</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
@@ -135,6 +136,7 @@ const MyBlogPosts = () => {
                             <td><span class="d-inline-block text-truncate" style={{maxWidth: '150px'}}>{data.post}</span></td>
                             <td>{data.status}</td>
                             <td>{data.category}</td>
+                            <td>{data.post_time}</td>
                             <td>{UserRole === 'Admin' ? <><a href="/dashboard/EditPosts"><button className="btn btn-primary" onClick={() => setData(data)}>Edit</button></a>
                               <button className="btn btn-danger"onClick={() => onDelete(data.id)}>Delete</button>
                               </> : 

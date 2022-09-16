@@ -53,22 +53,22 @@ const Signup = () => {
   return (
     <main className="form-signin w-100 m-auto">
       <Helmet><title>Sign-Up MyBlog.com</title></Helmet>
-      <form>
+      <form onSubmit={SubmitForm}>
         <img className="mb-4" src={LOGO} alt="" width="72" height="57" />
         <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
         <div className="form-floating">
-          <input type="text" className="form-control" id="floatingName" name="username" onChange={onChangeInput} placeholder="Name Surname" />
+          <input type="text" className="form-control" id="floatingName" name="username" onChange={onChangeInput} placeholder="Name Surname" required/>
           <label htmlFor="floatingName">Username</label>
         </div>
         <div className="form-floating">
-          <input type="email" className="form-control" id="floatingInput" name="email" onChange={onChangeInput} placeholder="name@example.com" />
+          <input type="email" className="form-control" id="floatingInput" name="email" onChange={onChangeInput} placeholder="name@example.com" required />
           <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
-          <input type="password" className="form-control" id="floatingPassword" name="password" onChange={onChangeInput} placeholder="Password" />
+          <input type="password" className="form-control" id="floatingPassword" name="password" onChange={onChangeInput} placeholder="Password" required/>
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button className="w-100 btn btn-lg btn-primary" type="button" onClick={SubmitForm}>Sign Up</button>
+        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
         <a href='/login'>Already have an account? Login here..</a>
         <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
       </form>
