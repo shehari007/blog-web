@@ -23,7 +23,7 @@ const MyBlogPosts = () => {
   useEffect(() => {
 
     const getUsers = async () => {
-      const res = await axios(`http://localhost/myposts.php?username=${username}`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPosts&username=${username}`);
       console.log(res.data);
       setInfoStatus(res.data);
     };
@@ -34,13 +34,13 @@ const MyBlogPosts = () => {
   const onApprove = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'approve');
+    data.append('action', 'approvefunction');
     data.append('id', id);
     data.append('status', 'Approved');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvefunction.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -59,13 +59,13 @@ const MyBlogPosts = () => {
   const onDelete = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'blogRecyclebin');
     data.append('id', id);
     data.append('status', 'Deleted');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/myblogRecyclebin.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data

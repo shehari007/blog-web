@@ -44,7 +44,7 @@ const CreatePost = () => {
         var post = convertedText;
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'add');
+        data.append('action', 'addNewBlog');
         data.append('title', title);
         data.append('post', post);
         data.append('category', selected);
@@ -57,7 +57,7 @@ const CreatePost = () => {
         let config = {
 
             method: 'post',
-            url: 'http://localhost/createnewblog.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
@@ -76,7 +76,7 @@ const CreatePost = () => {
 
     useEffect(() => {
         const menuData = async () => {
-            const res = await axios('http://localhost/menucategories.php?action=menu');
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=menu`);
             console.log(res.data);
             setCategory(res.data);
         };
@@ -91,14 +91,14 @@ const CreatePost = () => {
         console.log(category1);
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'add');
+        data.append('action', 'addnewcat');
         data.append('cat', category1);
         data.append('status', status);
 
         let config = {
 
             method: 'post',
-            url: 'http://localhost/addnewcategory.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
@@ -112,7 +112,7 @@ const CreatePost = () => {
             }).then(() => {
                 alert('New Category Added Successfully');
                 document.getElementById('categoryfield').value = '';
-                Refresh();
+              
             })
     }
 
@@ -122,7 +122,7 @@ const CreatePost = () => {
         console.log(category1);
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'req');
+        data.append('action', 'reqNewCategory');
         data.append('cat', category1);
         data.append('status', status);
         data.append('username', username);
@@ -130,7 +130,7 @@ const CreatePost = () => {
         let config = {
 
             method: 'post',
-            url: 'http://localhost/reqnewcategory.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
@@ -144,20 +144,10 @@ const CreatePost = () => {
             }).then(() => {
                 alert('New Category Requested Successfully');
                 document.getElementById('categoryfield').value = '';
-                Refresh();
+                
             })
     }
 
-    const Refresh = () => {
-        useEffect(() => {
-            const menuData = async () => {
-                const res = await axios('http://localhost/menucategories.php?action=menu');
-                console.log(res.data);
-                setCategory(res.data);
-            };
-            menuData();
-        }, []);
-    }
 
 
     return (

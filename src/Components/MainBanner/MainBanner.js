@@ -15,7 +15,7 @@ const MainBanner = () => {
     const [dataInfo, setDataInfo] = useState([]);
     useEffect(() => {
         const dataInfo = async () => {
-            const res = await axios('http://localhost/featuredpost.php?action=featured');
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=featured`);
             //console.log(res.data);
             setDataInfo(res.data);
         };

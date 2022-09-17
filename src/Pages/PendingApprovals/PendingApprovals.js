@@ -23,13 +23,13 @@ const PendingApprovals = () => {
   console.log(infoStatus);
 
   {
-    UserRole === 'Admin' ? Link = `http://localhost/AdminpendingapprovalsPosts.php?status=${'Pending Approval'}` :
-      Link = `http://localhost/pendingapprovalsPosts.php?status=${'Pending Approval'}&name=${username}`
+    UserRole === 'Admin' ? Link = `${process.env.REACT_APP_AXIOS_API_PHP}?action=adminpendapprovepost&status=${'Pending Approval'}` :
+      Link = `${process.env.REACT_APP_AXIOS_API_PHP}?action=myPendingPosts&status=${'Pending Approval'}&name=${username}`
   }
 
   {
-    UserRole === 'User' ? Link2 = `http://localhost/usercatdetails.php?status=${'Pending Approval'}&name=${username}` :
-      Link2 = `http://localhost/adminusercatdetails.php?action=menu`
+    UserRole === 'User' ? Link2 = `${process.env.REACT_APP_AXIOS_API_PHP}?action=userPendingCategory&status=${'Pending Approval'}&name=${username}` :
+      Link2 = `${process.env.REACT_APP_AXIOS_API_PHP}?action=adminUsercatDetails`
   }
 
   useEffect(() => {
@@ -57,13 +57,13 @@ const PendingApprovals = () => {
   const onApprove = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'approve');
+    data.append('action', 'approvefunction');
     data.append('id', id);
     data.append('status', 'Approved');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvefunction.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -82,13 +82,13 @@ const PendingApprovals = () => {
   const onCatApprove = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'approve');
+    data.append('action', 'admincatapprove');
     data.append('id', id);
     data.append('status', 'Approved');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/admincatapproval.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -107,12 +107,12 @@ const PendingApprovals = () => {
   const onDeleteAdmin = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'deleteapproval');
     data.append('id', id);
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvalsdelete.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -132,13 +132,13 @@ const PendingApprovals = () => {
   const onDeleteUser = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'blogRecyclebin');
     data.append('id', id);
     data.append('status', 'Deleted');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/myblogRecyclebin.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -158,13 +158,13 @@ const PendingApprovals = () => {
   const onDeleteCat = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'deleteCategory');
     data.append('id', id);
 
     let config = {
 
       method: 'post',
-      url: 'http://localhost/deletecategories.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data

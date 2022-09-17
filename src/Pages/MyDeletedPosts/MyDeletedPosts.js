@@ -25,7 +25,7 @@ const MyDeletedPosts = () => {
   useEffect(() => {
 
     const getDetails = async () => {
-      const res = await axios(`http://localhost/pendingapprovalsPosts.php?status=${'Deleted'}&name=${username}`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myPendingPosts&status=${'Deleted'}&name=${username}`);
       console.log(res.data);
       setInfoStatus(res.data);
     };
@@ -42,7 +42,7 @@ const MyDeletedPosts = () => {
     let config = {
 
       method: 'post',
-      url: 'http://localhost/deletedRecover.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -67,7 +67,7 @@ const MyDeletedPosts = () => {
     let config = {
 
       method: 'post',
-      url: 'http://localhost/deletedRecover.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -88,12 +88,12 @@ const MyDeletedPosts = () => {
   const onDelete = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'deleteapproval');
     data.append('id', id);
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvalsdelete.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -113,13 +113,13 @@ const MyDeletedPosts = () => {
   const onDeletAll = () => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'permanantDeleteAll');
     data.append('username', username);
     data.append('status', 'Deleted');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/deleteall.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data

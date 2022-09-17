@@ -43,7 +43,7 @@ const EditPosts = () => {
 
     useEffect(() => {
         const menuData = async () => {
-            const res = await axios('http://localhost/menucategories.php?action=menu');
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=menu`);
             console.log(res.data);
             setCategoryData(res.data);
         };
@@ -60,7 +60,7 @@ const EditPosts = () => {
 
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'update');
+        data.append('action', 'editPosts');
         data.append('id', id);
         data.append('title', title);
         data.append('post', post);
@@ -70,7 +70,7 @@ const EditPosts = () => {
         let config = {
 
             method: 'post',
-            url: 'http://localhost/editposts.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
@@ -107,7 +107,7 @@ const EditPosts = () => {
 
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'update');
+        data.append('action', 'editPosts');
         data.append('id', id);
         data.append('title', title);
         data.append('post', post);
@@ -117,7 +117,7 @@ const EditPosts = () => {
         let config = {
 
             method: 'post',
-            url: 'http://localhost/editposts.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data

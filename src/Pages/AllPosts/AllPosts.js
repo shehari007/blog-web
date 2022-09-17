@@ -23,7 +23,7 @@ const AllPosts = () => {
   useEffect(() => {
 
     const getUsers = async () => {
-      const res = await axios(`http://localhost/allposts.php`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=allposts`);
       console.log(res.data);
       setInfoStatus(res.data);
     };
@@ -34,13 +34,13 @@ const AllPosts = () => {
   const onApprove = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'approve');
+    data.append('action', 'approvefunction');
     data.append('id', id);
     data.append('status', 'Approved');
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvefunction.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -59,12 +59,12 @@ const AllPosts = () => {
   const onDeleteAdmin = (id) => {
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'deleteapproval');
     data.append('id', id);
     let config = {
 
       method: 'post',
-      url: 'http://localhost/approvalsdelete.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data

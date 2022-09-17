@@ -23,14 +23,14 @@ const NewCategory = () => {
         if (category !== ''){
             const FormData = require('form-data');
             let data = new FormData();
-            data.append('action', 'add');
+            data.append('action', 'addnewcat');
             data.append('cat', category);
             data.append('status', 'Approved');
     
             let config = {
     
                 method: 'post',
-                url: 'http://localhost/addnewcategory.php',
+                url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
                 headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
                 ,
                 data: data
@@ -51,7 +51,7 @@ const NewCategory = () => {
 
     useEffect(() => {
         const menuData = async () => {
-            const res = await axios('http://localhost/adminMenucategory.php?action=menu');
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=adminmenucat`);
             setInfoStatus(res.data);
         };
         menuData();
@@ -60,13 +60,13 @@ const NewCategory = () => {
     const onDelete = (id) => {
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'delete');
+        data.append('action', 'deleteCategory');
         data.append('id', id);
 
         let config = {
 
             method: 'post',
-            url: 'http://localhost/deletecategories.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
@@ -91,13 +91,13 @@ const NewCategory = () => {
      const approveAll =() => {
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'approve');
+        data.append('action', 'approveallcat');
         data.append('status', 'Approved');
 
         let config = {
 
             method: 'post',
-            url: 'http://localhost/approveallcat.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data

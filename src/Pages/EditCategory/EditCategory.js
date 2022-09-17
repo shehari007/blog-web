@@ -32,7 +32,7 @@ const EditCategory = () => {
 
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'update');
+        data.append('action', 'editCategory');
         data.append('id', id)
         data.append('category', category);
         data.append('status', status
@@ -41,7 +41,7 @@ const EditCategory = () => {
         let config = {
 
             method: 'post',
-            url: 'http://localhost/editcategory.php',
+            url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
             ,
             data: data
