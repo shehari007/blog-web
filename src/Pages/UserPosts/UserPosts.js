@@ -18,7 +18,7 @@ const UserPosts = () => {
   useEffect(() => {
 
     const getUsers = async () => {
-      const res = await axios(`http://localhost/myposts.php?username=${UserName}`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPosts&username=${UserName}`);
       console.log(res.data);
       setInfo(res.data);
     };
@@ -29,7 +29,7 @@ const UserPosts = () => {
   useEffect(() => {
     
     const getUsers = async () => {
-      const res = await axios(`http://localhost/archivepanel.php`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=archiveDates`);
       console.log(res.data);
       setarchiveDate(res.data);
     };

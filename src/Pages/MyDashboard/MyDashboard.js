@@ -22,12 +22,12 @@ const MyDashboard = () => {
     const [myApprovals, setMyApprovals] = useState([]);
     const [myBlogDeleted, setMyBlogDeleted] = useState([]);
    
-    { UserRole === 'Admin' ? Link = `http://localhost/Adminpendingapprovals.php` : Link = `http://localhost/pendingapprovalsCount.php?name=${Details}` }
+    { UserRole === 'Admin' ? Link = `${process.env.REACT_APP_AXIOS_API_PHP}?action=adminpendapprove` : Link = `${process.env.REACT_APP_AXIOS_API_PHP}?action=pendingCounts&name=${Details}` }
     
     useEffect(() => {
 
         const getData = async () => {
-            const res = await axios(`http://localhost/dashdetails.php?username=${Details}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=totalBlogPostsCount&username=${Details}`);
             console.log(res.data);
             setTotalPost(res.data);  
         };
@@ -37,7 +37,7 @@ const MyDashboard = () => {
     useEffect(() => {
 
         const getData = async () => {
-            const res = await axios(`http://localhost/mypostscount.php?username=${Details}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPostsCount&username=${Details}`);
             console.log(res.data);
             setmyPost(res.data);  
         };
@@ -56,7 +56,7 @@ const MyDashboard = () => {
     useEffect(() => {
 
         const getData = async () => {
-            const res = await axios(`http://localhost/myblogRecycleCount.php?username=${Details}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myblogDeleteCount&username=${Details}`);
             console.log(res.data);
             setMyBlogDeleted(res.data);
         };

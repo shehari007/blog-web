@@ -22,7 +22,7 @@ const MainCards = () => {
   const [dataInfo, setDataInfo] = useState([]);
   useEffect(() => {
     const dataInfo = async () => {
-      const res = await axios('http://localhost/blog.php?action=randomCards');
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=randomCards`);
       //console.log(res.data);
       setDataInfo(res.data);
     };

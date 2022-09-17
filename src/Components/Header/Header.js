@@ -29,16 +29,16 @@ const Header = () => {
   const [menuData, setMenuData] = useState([]);
   useEffect(() => {
     const menuData = async () => {
-      const res = await axios('http://localhost/menucategories.php?action=menu');
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=menu`);
       setMenuData(res.data);
     };
     menuData();
   }, []);
 
   useEffect(() => {
-    console.log(`http://localhost/img.php`)
+    //console.log(`http://localhost/img.php`)
     const getDetails = async () => {
-      const res = await axios(`http://localhost/img.php?name=${username}`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=imageData&name=${username}`);
       console.log(res.data);
       setdosyaname(res.data);
     };

@@ -29,13 +29,13 @@ export default class Upload extends React.Component {
     fileUpload = () => {
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'approve');
+        data.append('action', 'uploadPicture');
         data.append('image', this.state.selectedFile, this.state.selectedFile.name);
         data.append('name', username);
         let config = {
 
             method: 'post',
-            baseURL: 'http://localhost/core.php',
+            baseURL: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             withCredentials: false,
             data: data
         };

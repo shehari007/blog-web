@@ -32,7 +32,7 @@ const Login = () => {
 
     let config = {
       method: 'post',
-      url: 'http://localhost/blog.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data

@@ -22,7 +22,7 @@ function MyVerticallyCenteredModal(props) {
 
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'add');
+    data.append('action', 'newUser');
     data.append('name', document.getElementById('username').value);
     data.append('email', document.getElementById('email').value);
     data.append('password', document.getElementById('password').value);
@@ -31,7 +31,7 @@ function MyVerticallyCenteredModal(props) {
     let config = {
 
       method: 'post',
-      url: 'http://localhost/newuser.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       data: data
@@ -107,7 +107,7 @@ const Profile = () => {
   useEffect(() => {
 
     const getData = async () => {
-      const res = await axios(`http://localhost/userdata.php`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=userDetails`);
       console.log(res.data);
       setUserData(res.data);
     };
@@ -117,7 +117,7 @@ const Profile = () => {
   useEffect(() => {
 
     const getData = async () => {
-      const res = await axios(`http://localhost/mypostscount.php?username=${username}`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPostsCount&username=${username}`);
       console.log(res.data);
       setMyPostCount(res.data);
     };
@@ -132,14 +132,14 @@ const Profile = () => {
     var currentpass = document.getElementById('floatingPassword').value;
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'pass');
+    data.append('action', 'currentPassword');
     data.append('currpass', currentpass);
     data.append('name', username);
 
     let config = {
 
       method: 'post',
-      url: 'http://localhost/currentpassword.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       withCredentials: false,
@@ -157,14 +157,14 @@ const Profile = () => {
         var newpassword = document.getElementById('floatingPassword1').value;
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'pass');
+        data.append('action', 'newPassword');
         data.append('pass', newpassword);
         data.append('name', username);
 
         let config = {
 
           method: 'post',
-          url: 'http://localhost/newpassword.php',
+          url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
           headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
           ,
           withCredentials: false,
@@ -201,14 +201,14 @@ const Profile = () => {
     var currentemail = document.getElementById('floatingEmail').value;
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'pass');
+    data.append('action', 'currentEmailAddress');
     data.append('email', currentemail);
     data.append('name', username);
 
     let config = {
 
       method: 'post',
-      url: 'http://localhost/currentemailaddress.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
       ,
       withCredentials: false,
@@ -226,14 +226,14 @@ const Profile = () => {
         var newemail = document.getElementById('floatingEmail1').value;
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'pass');
+        data.append('action', 'newEmailAddress');
         data.append('email', newemail);
         data.append('name', username);
 
         let config = {
 
           method: 'post',
-          url: 'http://localhost/newemailaddress.php',
+          url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
           headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
           ,
           withCredentials: false,
@@ -270,14 +270,14 @@ const Profile = () => {
     console.log(role);
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'delete');
+    data.append('action', 'deletebyAdmin');
     data.append('name', name);
     data.append('user', role);
 
     let config = {
 
       method: 'post',
-      url: 'http://localhost/DELETEACCOUNT.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       withCredentials: false,
       data: data
     };
@@ -307,7 +307,7 @@ const Profile = () => {
     let config = {
 
       method: 'post',
-      url: 'http://localhost/promoteadmin.php',
+      url: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       withCredentials: false,
       data: data
     };
@@ -329,7 +329,7 @@ const Profile = () => {
 
     const FormData = require('form-data');
     let data = new FormData();
-    data.append('action', 'confirm');
+    data.append('action', 'confirmation');
     data.append('email', document.getElementById('deleteemail').value);
     data.append('pass', document.getElementById('floatingpass2').value);
     data.append('user', UserRole);
@@ -338,7 +338,7 @@ const Profile = () => {
     let config = {
 
       method: 'post',
-      baseURL: 'http://localhost/DELETEACCOUNT.php',
+      baseURL: `${process.env.REACT_APP_AXIOS_API_PHP}`,
       withCredentials: false,
       data: data
     };
@@ -359,9 +359,9 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    console.log(`http://localhost/img.php`)
+    //console.log(`http://localhost/img.php`)
     const getDetails = async () => {
-      const res = await axios(`http://localhost/img.php?name=${username}`);
+      const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=imageData&name=${username}`);
       console.log(res.data);
       setdosyaname(res.data);
     };
@@ -397,12 +397,6 @@ const Profile = () => {
           <ListGroup.Item>Total Likes: 0</ListGroup.Item>
           <ListGroup.Item>Access Mode: {UserRole}</ListGroup.Item>
         </ListGroup>
-        {/* <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul> */}
 
       </div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

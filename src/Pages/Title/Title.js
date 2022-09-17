@@ -28,7 +28,7 @@ const Title = () => {
     useEffect(() => {
 
         const getUsers = async () => {
-            const res = await axios(`http://localhost/archivepanel.php`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=archiveDates`);
             console.log(res.data);
             setarchiveDate(res.data);
         };
@@ -39,7 +39,7 @@ const Title = () => {
     useEffect(() => {
 
         const getDetails = async () => {
-            const res = await axios(`http://localhost/commentcount.php?title=${TitleName}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=commentcount&title=${TitleName}`);
             console.log(res.data);
             setcommentCount(res.data);
         };
@@ -49,7 +49,7 @@ const Title = () => {
     useEffect(() => {
 
         const getDetails = async () => {
-            const res = await axios(`http://localhost/userdata.php?username=${username}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=userDetails&username=${username}`);
             console.log(res.data);
             setemailData(res.data);
         };
@@ -57,9 +57,9 @@ const Title = () => {
     }, []);
 
     useEffect(() => {
-        console.log(`http://localhost/img.php`)
+        //console.log(`http://localhost/img.php`)
         const getDetails = async () => {
-            const res = await axios(`http://localhost/img.php?name=${username}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=imageData&name=${username}`);
             console.log(res.data);
             setpictureName(res.data);
         };
@@ -69,7 +69,7 @@ const Title = () => {
     useEffect(() => {
         const getUsers = async () => {
 
-            const res = await axios(`http://localhost/alltitle.php?title=${TitleName}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=alltitle&title=${TitleName}`);
             setInfo(res.data);
         };
         getUsers();
@@ -79,7 +79,7 @@ const Title = () => {
     useEffect(() => {
         const getUsers = async () => {
 
-            const res = await axios(`http://localhost/getallcomments.php?title=${TitleName}`);
+            const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=getAllComments&title=${TitleName}`);
             setComments(res.data);
         };
         getUsers();
@@ -99,7 +99,7 @@ const Title = () => {
         var comment = document.getElementById('visitcm').value;
         const FormData = require('form-data');
         let data = new FormData();
-        data.append('action', 'upload');
+        data.append('action', 'uploadComment');
         data.append('title', TitleName);
         data.append('name', cm_name);
         data.append('email', emailData);
@@ -111,7 +111,7 @@ const Title = () => {
         let config = {
 
             method: 'post',
-            baseURL: 'http://localhost/uploadcomment.php',
+            baseURL: `${process.env.REACT_APP_AXIOS_API_PHP}`,
             withCredentials: false,
             data: data
         };
