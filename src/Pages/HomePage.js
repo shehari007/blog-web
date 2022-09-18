@@ -4,7 +4,7 @@ import MainModule from '..//Components/MainModule/MainModule'
 import Banner from '../Components/MainBanner/MainBanner'
 import { Helmet } from 'react-helmet'
 
-console.log(process.env.REACT_APP_AXIOS_API_PHP)
+//console.log(process.env.REACT_APP_AXIOS_API_PHP)
 const HomePage = () => {
   return (
     <div className="container">

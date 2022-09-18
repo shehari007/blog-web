@@ -19,14 +19,14 @@ const MyDeletedPosts = () => {
   }
   var Link = ''
   const [infoStatus, setInfoStatus] = useState([]);
-  console.log(infoStatus);
+  //console.log(infoStatus);
 
 
   useEffect(() => {
 
     const getDetails = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myPendingPosts&status=${'Deleted'}&name=${username}`);
-      console.log(res.data);
+      //console.log(res.data);
       setInfoStatus(res.data);
     };
 
@@ -49,7 +49,7 @@ const MyDeletedPosts = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -74,7 +74,7 @@ const MyDeletedPosts = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -100,7 +100,7 @@ const MyDeletedPosts = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -126,7 +126,7 @@ const MyDeletedPosts = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);

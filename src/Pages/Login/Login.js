@@ -39,7 +39,7 @@ const Login = () => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data)
+        //console.log(response.data)
         let tokenStatus='';
         let UserDetails = '';
         if (response.data==='00'){

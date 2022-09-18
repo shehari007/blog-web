@@ -18,13 +18,13 @@ const MyBlogPosts = () => {
 
 
   const [infoStatus, setInfoStatus] = useState([]);
-  console.log(infoStatus);
+  //console.log(infoStatus);
 
   useEffect(() => {
 
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPosts&username=${username}`);
-      console.log(res.data);
+      //console.log(res.data);
       setInfoStatus(res.data);
     };
 
@@ -47,7 +47,7 @@ const MyBlogPosts = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -72,7 +72,7 @@ const MyBlogPosts = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);

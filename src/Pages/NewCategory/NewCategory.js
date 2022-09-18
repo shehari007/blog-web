@@ -19,7 +19,7 @@ const NewCategory = () => {
     const postData = () => {
 
         var category = document.getElementById('nameofcategory').value;
-        console.log(category);
+       // console.log(category);
         if (category !== ''){
             const FormData = require('form-data');
             let data = new FormData();
@@ -37,7 +37,7 @@ const NewCategory = () => {
             };
     
             axios(config).then(function (response) {
-                console.log(JSON.stringify(response.data));
+                //console.log(JSON.stringify(response.data));
             })
                 .catch(function (error) {
                     console.log(error);
@@ -73,7 +73,7 @@ const NewCategory = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);
@@ -104,7 +104,7 @@ const NewCategory = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);

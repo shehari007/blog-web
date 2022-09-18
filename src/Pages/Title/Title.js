@@ -29,7 +29,7 @@ const Title = () => {
 
         const getUsers = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=archiveDates`);
-            console.log(res.data);
+            //console.log(res.data);
             setarchiveDate(res.data);
         };
 
@@ -40,7 +40,7 @@ const Title = () => {
 
         const getDetails = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=commentcount&title=${TitleName}`);
-            console.log(res.data);
+            //console.log(res.data);
             setcommentCount(res.data);
         };
         getDetails();
@@ -50,7 +50,7 @@ const Title = () => {
 
         const getDetails = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=userDetails&username=${username}`);
-            console.log(res.data);
+            //console.log(res.data);
             setemailData(res.data);
         };
         getDetails();
@@ -60,7 +60,7 @@ const Title = () => {
         //console.log(`http://localhost/img.php`)
         const getDetails = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=imageData&name=${username}`);
-            console.log(res.data);
+            //console.log(res.data);
             setpictureName(res.data);
         };
         getDetails();
@@ -117,7 +117,7 @@ const Title = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
             window.location.reload();
         }).catch(function (error) {
             console.log(error);

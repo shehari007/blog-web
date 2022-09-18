@@ -28,7 +28,7 @@ const MyDashboard = () => {
 
         const getData = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=totalBlogPostsCount&username=${Details}`);
-            console.log(res.data);
+            //console.log(res.data);
             setTotalPost(res.data);  
         };
         getData();
@@ -38,7 +38,7 @@ const MyDashboard = () => {
 
         const getData = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPostsCount&username=${Details}`);
-            console.log(res.data);
+            //console.log(res.data);
             setmyPost(res.data);  
         };
         getData();
@@ -47,7 +47,7 @@ const MyDashboard = () => {
     useEffect(() => {
         const getData = async () => {
             const res = await axios(Link);
-            console.log(res.data);
+            //console.log(res.data);
             setMyApprovals(res.data); 
         };
         getData();
@@ -57,7 +57,7 @@ const MyDashboard = () => {
 
         const getData = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myblogDeleteCount&username=${Details}`);
-            console.log(res.data);
+            //console.log(res.data);
             setMyBlogDeleted(res.data);
         };
 

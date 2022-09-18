@@ -20,7 +20,7 @@ const PendingApprovals = () => {
   var Link2 = ''
   const [UserCatStatus, setUserCatStatus] = useState([]);
   const [infoStatus, setInfoStatus] = useState([]);
-  console.log(infoStatus);
+  //console.log(infoStatus);
 
   {
     UserRole === 'Admin' ? Link = `${process.env.REACT_APP_AXIOS_API_PHP}?action=adminpendapprovepost&status=${'Pending Approval'}` :
@@ -33,10 +33,10 @@ const PendingApprovals = () => {
   }
 
   useEffect(() => {
-    console.log(Link2)
+    //console.log(Link2)
     const getDetails = async () => {
       const res = await axios(Link2);
-      console.log(res.data);
+      //console.log(res.data);
       setUserCatStatus(res.data);
     };
 
@@ -44,10 +44,10 @@ const PendingApprovals = () => {
   }, []);
 
   useEffect(() => {
-    console.log(Link)
+    //console.log(Link)
     const getDetails = async () => {
       const res = await axios(Link);
-      console.log(res.data);
+      //console.log(res.data);
       setInfoStatus(res.data);
     };
 
@@ -70,7 +70,7 @@ const PendingApprovals = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -95,7 +95,7 @@ const PendingApprovals = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -119,7 +119,7 @@ const PendingApprovals = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -145,7 +145,7 @@ const PendingApprovals = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -171,7 +171,7 @@ const PendingApprovals = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
