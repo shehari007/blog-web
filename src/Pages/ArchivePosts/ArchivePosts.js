@@ -19,7 +19,7 @@ const ArchivePosts = () => {
 
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=allarchive&archive_time=${ArchiveDate}`);
-      console.log(res.data);
+      //console.log(res.data);
       setInfo(res.data);
     };
 
@@ -30,7 +30,7 @@ const ArchivePosts = () => {
     
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=archiveDates`);
-      console.log(res.data);
+      //console.log(res.data);
       setarchiveDate(res.data);
     };
 

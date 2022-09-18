@@ -29,7 +29,7 @@ const EditPosts = () => {
     const [category, setCategory] = useState('');
     const [status, setStatus] = useState('');
     //const [convertedText, setConvertedText] = useState("");
-    console.log(post)
+    //console.log(post)
 
     useEffect(() => {
 
@@ -44,7 +44,7 @@ const EditPosts = () => {
     useEffect(() => {
         const menuData = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=menu`);
-            console.log(res.data);
+            //console.log(res.data);
             setCategoryData(res.data);
         };
         menuData();
@@ -77,7 +77,7 @@ const EditPosts = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+           // console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);
@@ -124,7 +124,7 @@ const EditPosts = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);

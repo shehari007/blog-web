@@ -12,7 +12,7 @@ const MainModule = () => {
 
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=homepage`);
-      console.log(res.data);
+      //console.log(res.data);
       setInfo(res.data);
     };
 
@@ -23,7 +23,7 @@ const MainModule = () => {
     
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=archiveDates`);
-      console.log(res.data);
+      //console.log(res.data);
       setarchiveDate(res.data);
     };
 
@@ -77,7 +77,7 @@ const MainModule = () => {
           <ol className="list-unstyled mb-0">
           {archiveDate.map((data)=>{
                 var link = "/archiveposts/"+data.archive_time
-                console.log(link);
+                //console.log(link);
               return <>
               
                <li><a href={link}>{data.archive_time}</a></li>

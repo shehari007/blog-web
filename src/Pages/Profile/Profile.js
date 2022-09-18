@@ -38,7 +38,7 @@ function MyVerticallyCenteredModal(props) {
     }
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
     })
       .catch(function (error) {
         console.log(error);
@@ -98,7 +98,7 @@ const Profile = () => {
     var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
     var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
   }
-  console.log(UserRole)
+  //console.log(UserRole)
 
   const [dosyaname, setdosyaname] = useState([]);
   const [postCount, setMyPostCount] = useState([]);
@@ -108,7 +108,7 @@ const Profile = () => {
 
     const getData = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=userDetails`);
-      console.log(res.data);
+      //console.log(res.data);
       setUserData(res.data);
     };
     getData();
@@ -118,7 +118,7 @@ const Profile = () => {
 
     const getData = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPostsCount&username=${username}`);
-      console.log(res.data);
+      //console.log(res.data);
       setMyPostCount(res.data);
     };
     getData();
@@ -148,7 +148,7 @@ const Profile = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+     //console.log(JSON.stringify(response.data));
       if (response.data !== 'true[]') {
         alert('Current Password is wrong try again');
         window.location.reload();
@@ -173,7 +173,7 @@ const Profile = () => {
         };
 
         axios(config).then(function (response) {
-          console.log(JSON.stringify(response.data));
+          //console.log(JSON.stringify(response.data));
           if (response.data === true) {
             alert('Password Updated successfully')
             window.location.reload();
@@ -217,7 +217,7 @@ const Profile = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
       if (response.data !== 'true[]') {
         alert('Current Email is wrong try again');
         window.location.reload();
@@ -242,7 +242,7 @@ const Profile = () => {
         };
 
         axios(config).then(function (response) {
-          console.log(JSON.stringify(response.data));
+          //console.log(JSON.stringify(response.data));
           if (response.data === true) {
             alert('Email Updated successfully')
             window.location.reload();
@@ -266,8 +266,8 @@ const Profile = () => {
   }
 
   const onDeleteUserData = (name, role) => {
-    console.log(name);
-    console.log(role);
+    //console.log(name);
+    //console.log(role);
     const FormData = require('form-data');
     let data = new FormData();
     data.append('action', 'deletebyAdmin');
@@ -283,7 +283,7 @@ const Profile = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
 
     })
       .catch(function (error) {
@@ -313,7 +313,7 @@ const Profile = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
       alert(name + 'Promoted successfully')
       window.location.reload();
 
@@ -344,7 +344,7 @@ const Profile = () => {
     };
 
     axios(config).then(function (response) {
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
       if (response.data !== 'true[]') {
         alert('Email or Password is incorrect, try again');
       } else if (response.data === 'true[]') {
@@ -362,7 +362,7 @@ const Profile = () => {
     //console.log(`http://localhost/img.php`)
     const getDetails = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=imageData&name=${username}`);
-      console.log(res.data);
+      //console.log(res.data);
       setdosyaname(res.data);
     };
     getDetails();

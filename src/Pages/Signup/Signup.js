@@ -40,7 +40,7 @@ const Signup = () => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         if (response.data === true) {
           alert('Account Created Successfully with username: ' + formData.username + '');
           history('/login')

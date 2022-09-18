@@ -39,7 +39,7 @@ const Header = () => {
     //console.log(`http://localhost/img.php`)
     const getDetails = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=imageData&name=${username}`);
-      console.log(res.data);
+      //console.log(res.data);
       setdosyaname(res.data);
     };
     getDetails();

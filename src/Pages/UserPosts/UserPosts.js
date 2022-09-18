@@ -13,13 +13,13 @@ const UserPosts = () => {
   
   const [info, setInfo] = useState([]);
   const [archiveDate, setarchiveDate] = useState([]);
-  console.log(info);
+  //console.log(info);
 
   useEffect(() => {
 
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPosts&username=${UserName}`);
-      console.log(res.data);
+      //console.log(res.data);
       setInfo(res.data);
     };
 
@@ -30,7 +30,7 @@ const UserPosts = () => {
     
     const getUsers = async () => {
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=archiveDates`);
-      console.log(res.data);
+      //console.log(res.data);
       setarchiveDate(res.data);
     };
 

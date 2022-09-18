@@ -13,7 +13,7 @@ const role = secureLocalStorage.getItem('setRole')
     var decryptedUserDetails = CryptoJS.AES.decrypt(Username, 'Secret Pharase');
     var username = decryptedUserDetails.toString(CryptoJS.enc.Utf8);
   }
-   console.log(username)
+   //console.log(username)
 
 export default class Upload extends React.Component {
     
@@ -22,7 +22,7 @@ export default class Upload extends React.Component {
     }
     fileSelect = event => {
         this.setState({ selectedFile: event.target.files[0] })
-        console.log(event.target.files[0])
+        //console.log(event.target.files[0])
         
     }
 
@@ -41,7 +41,7 @@ export default class Upload extends React.Component {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);
@@ -51,19 +51,6 @@ export default class Upload extends React.Component {
             })
     }
 
-
-    //   fileUpload = () => {
-    //     const fd = new FormData();
-    //     fd.append('action', 'approve');
-    //     fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-    //     axios.post('http://localhost/core.php', fd
-    //     ).then(res=>
-    //     {
-    //     console.log(res);
-    //     }
-    //     );
-
-    //   }
     render() {
         return (
             <div style={{justifyContent: 'center'}}>
@@ -73,4 +60,3 @@ export default class Upload extends React.Component {
         );
     }
 }
-  //ReactDOM.render(<Hello />, document.getElementById('root'));

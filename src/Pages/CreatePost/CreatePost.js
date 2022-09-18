@@ -64,7 +64,7 @@ const CreatePost = () => {
         }
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);
@@ -77,7 +77,7 @@ const CreatePost = () => {
     useEffect(() => {
         const menuData = async () => {
             const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=menu`);
-            console.log(res.data);
+            //console.log(res.data);
             setCategory(res.data);
         };
         menuData();
@@ -88,7 +88,7 @@ const CreatePost = () => {
     const addCat = () => {
 
         var category1 = document.getElementById('categoryfield').value;
-        console.log(category1);
+        //console.log(category1);
         const FormData = require('form-data');
         let data = new FormData();
         data.append('action', 'addnewcat');
@@ -105,7 +105,7 @@ const CreatePost = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);
@@ -119,7 +119,7 @@ const CreatePost = () => {
     const reqCat = () => {
 
         var category1 = document.getElementById('categoryfield').value;
-        console.log(category1);
+        //console.log(category1);
         const FormData = require('form-data');
         let data = new FormData();
         data.append('action', 'reqNewCategory');
@@ -137,7 +137,7 @@ const CreatePost = () => {
         };
 
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         })
             .catch(function (error) {
                 console.log(error);
