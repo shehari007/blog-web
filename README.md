@@ -5,12 +5,12 @@ This project was built using bootstrap 5 Blog theme example & React.Js Create Re
 ## Website Main Features: 
 
 1- Dynamic Headers.\
-2- Profile Picture Functionalty
-3- Admin and User Privilidges 
-3- Admin Dashboard with special permissions to Delete, Edit & Add Posts, Create New & Delete Users, Add new categories and change current menus and Approval Functionality.
-4- CryptoJS and AES-256bit Encryption Login and Signup Procedures
-5- Secure Encrypted Local Storage
-6- Comments Section & Total Comments Count
+2- Profile Picture Functionalty.\
+3- Admin and User Privilidges.\
+3- Admin Dashboard with special permissions to Delete, Edit & Add Posts, Create New & Delete Users, Add new categories and change current menus and Approval Functionality.\
+4- CryptoJS and AES-256bit Encryption Login and Signup Procedures.\
+5- Secure Encrypted Local Storage.\
+6- Comments Section & Total Comments Count.\
 7- Comments Management Coming SOON!!
 
 ## Pre-Requirements:
