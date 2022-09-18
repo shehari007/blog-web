@@ -126,14 +126,14 @@ const Title = () => {
     }
     var profilelink = ''
     {
-        UserRole ? pictureName.map((data) => {
+        UserRole && pictureName !== '0 results[]' ? pictureName.map((data) => {
 
             profilelink = "/" + data.filename
         }) : profilelink = "/default.jpg"
     }
 
 
-    console.log(ct);
+    //console.log(ct);
     return (
 
         <div className="container" style={{ marginTop: '2%' }}>
@@ -220,7 +220,7 @@ const Title = () => {
                             <ol className="list-unstyled mb-0">
                                 {archiveDate.map((data) => {
                                     var link = "/archiveposts/" + data.archive_time
-                                    console.log(link);
+                                    //console.log(link);
                                     return <>
 
                                         <li><a href={link}>{data.archive_time}</a></li>
