@@ -15,10 +15,16 @@ This project was built using bootstrap 5 Blog theme example & React.Js Create Re
 8- Comments Management (work in progress).
 
 <figure>
+  <figcaption>Header Visitor</figcaption>
   <img
   src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(1).png"
   alt="sc1">
-  <figcaption>Header Visitor</figcaption>
+</figure>
+<figure>
+  <figcaption>Header Logged In </figurecaption>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(2).png"
+  alt="sc2">
 </figure>
 
 ## Pre-Requirements:
