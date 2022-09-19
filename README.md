@@ -26,6 +26,36 @@ This project was built using bootstrap 5 Blog theme example & React.Js Create Re
   src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(2).png"
   alt="sc2">
 </figure>
+<figure>
+  <figcaption>Admin Dashboard </figurecaption>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(3).png"
+  alt="sc3">
+</figure>
+<figure>
+  <figcaption>Blogs Panel </figurecaption>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(4).png"
+  alt="sc4">
+</figure>
+<figure>
+  <figcaption>Add New Blog Panel </figurecaption>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(6).png"
+  alt="sc6">
+</figure>
+<figure>
+  <figcaption>Add New Blog Panel </figurecaption>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(6).png"
+  alt="sc6">
+</figure>
+<figure>
+  <figcaption>Category Settings </figurecaption>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(7).png"
+  alt="sc7">
+</figure>
 
 ## Pre-Requirements:
 
