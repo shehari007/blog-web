@@ -12,7 +12,9 @@ This project was built using bootstrap 5 Blog theme example & React.Js Create Re
 5- Secure Browser Encrypted Local Storage.\
 6- Comments Section & Total Comments Count.\
 7- Rich Text Editor for Blog Post.\
-8- Comments Management (work in progress).
+8- Managing Deleted Posts and categories.\
+9- Promote Users to be Admin Functionality.\
+10- Comments Management (work in progress).\
 
 <figure>
   <figcaption>Header Visitor</figcaption>
