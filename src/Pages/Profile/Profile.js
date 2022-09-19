@@ -394,7 +394,7 @@ const Profile = () => {
         <ListGroup variant="flush" style={{ marginLeft: '2.5%' }}>
           <ListGroup.Item>Username: {username}</ListGroup.Item>
           <ListGroup.Item>My Total Posts: {postCount}</ListGroup.Item>
-          <ListGroup.Item>Total Likes: 0</ListGroup.Item>
+          <ListGroup.Item>Total Comments: 0</ListGroup.Item>
           <ListGroup.Item>Access Mode: {UserRole}</ListGroup.Item>
         </ListGroup>
 
