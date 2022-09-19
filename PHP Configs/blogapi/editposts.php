@@ -1,6 +1,5 @@
 <?php
 
-
 if ($_POST["action"] == "editPosts") {
     $escaped_post = $conn -> real_escape_string($_POST['post']);
     $escaped_title = $conn -> real_escape_string($_POST['title']);
