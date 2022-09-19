@@ -19,11 +19,11 @@ This project was built using bootstrap 5 Blog theme example & React.Js Create Re
 1- Node.js package 16+ (LTS Preffered).\
 2- WAMPP or XAMPP Server for accessing local SQL database.
 
-In the project directory, you can run find PHP CONFIG folder for all the backend php scripts accessing SQL database, copy and paste the folder contents to XAMPP htdocs directory for acccessing API.\
+*In the project directory, you can run find PHP CONFIG folder for all the backend php scripts accessing SQL database, copy and paste the folder contents to XAMPP htdocs directory for acccessing API
 
-In XAMPP PHP MyAdmin Create a new database name 'blog' and restore the SQL file in PHP Configs folder it will automatically upload all the required tables with dummy data.\
+*In XAMPP PHP MyAdmin Create a new database name 'blog' and restore the SQL file in PHP Configs folder it will automatically upload all the required tables with dummy data
 
-if you changed the database name from 'blog' to whatever you like then make sure you edit the config_db2.php file in PHP Configs folder and change the database name accordingly.\
+*if you changed the database name from 'blog' to whatever you like then make sure you edit the config_db2.php file in PHP Configs folder and change the database name accordingly
 
 ## After Pre-Requirements:
 
