@@ -14,6 +14,13 @@ This project was built using bootstrap 5 Blog theme example & React.Js Create Re
 7- Rich Text Editor for Blog Post.\
 8- Comments Management (work in progress).
 
+<figure>
+  <img
+  src="https://github.com/shehari007/blog-web/blob/main/Screenshots/Screenshot%20(1).png"
+  alt="sc1">
+  <figcaption>Header Visitor</figcaption>
+</figure>
+
 ## Pre-Requirements:
 
 1- Node.js package 16+ (LTS Preffered).\
