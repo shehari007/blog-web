@@ -86,8 +86,9 @@ const UserPosts = () => {
               <h4 className="fst-italic">Archives</h4>
               <ol className="list-unstyled mb-0">
               {archiveDate.map((data)=>{
+                var link = "/archiveposts/"+data.archive_time
               return <>
-               <li><a href="localhost:3000">{data.archive_time}</a></li>
+               <li><a href={link}>{data.archive_time}</a></li>
               </>
             })}
               </ol>

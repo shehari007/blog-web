@@ -130,7 +130,7 @@ const Header = () => {
                   </ul></>
                 :
                 <>
-                <a href="/dashboard/profile"><img src={pic} className="img-thumbnail" alt="..." style={{ width: '50px', height: '50px', borderRadius: '75%'}}></img></a>
+                {/*<a href="/dashboard/profile"><img src={pic} className="img-thumbnail" alt="..." style={{ width: '50px', height: '50px', borderRadius: '75%'}}></img></a>*/}
                 <a href="/"  style={{marginLeft: '1%'}} className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">Welcome to My BLOG</a>
                   <div className="text-end">
 
