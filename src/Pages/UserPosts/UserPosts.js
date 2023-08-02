@@ -16,8 +16,9 @@ const UserPosts = () => {
   //console.log(info);
 
   useEffect(() => {
-
+    
     const getUsers = async () => {
+      
       const res = await axios(`${process.env.REACT_APP_AXIOS_API_PHP}?action=myBlogPosts&username=${UserName}`);
       //console.log(res.data);
       setInfo(res.data);
